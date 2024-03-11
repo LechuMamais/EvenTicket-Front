@@ -1,0 +1,14 @@
+.event-card{
+    min-width: 400px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+}
+.event-card>h3{
+    font-size: 40px;
+}
