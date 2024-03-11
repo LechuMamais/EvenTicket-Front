@@ -31,25 +31,28 @@
 }
 
 #user-events-container {
+    padding: 2rem 0;
     width: 90%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: flex-start;
+    gap: 10%;
 }
 
 #user-events-as-organizer-container,
 #user-events-as-assistant-container {
-    width: 50%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
 }
 
-#user-events-as-organizer-list,
+#events-as-organizer-list,
 #events-as-assistant-list {
+    padding: 1rem 0;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -61,10 +64,12 @@
 /*TEXTO*/
 #user-events-container h2{
     font-size: 22px;
+    padding-bottom: 2px;
+    border-bottom: solid 1px rgb(211, 211, 211);
 }
 
 /*BOTONES*/
-#user-info-container>button,
+#user-options-container >button,
 #user-events-as-organizer-container>button,
 #user-events-as-assistant-container>button {
     cursor: pointer;
@@ -75,4 +80,5 @@
 
 #logOut-button {
     width: 70px !important;
+    margin-left: 1rem !important;
 }

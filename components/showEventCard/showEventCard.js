@@ -1,5 +1,5 @@
 import { showEventDetails } from "../eventDetails/eventDetails";
-import "./showEventCard.css"; // Importamos los estilos específicos del componente
+import "./showEventCard.css";
 
 // Definimos el componente ShowEventCard como una función que recibe las props
 export const showEventCard = (event) => {

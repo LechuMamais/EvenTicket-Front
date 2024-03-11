@@ -6,7 +6,7 @@ import { showEvents } from "../events/events";
 
 export const createHeader = () => {
     const userName = localStorage.getItem("userName");
-    
+
     const header = document.createElement("header");
     header.innerHTML = `
         <ul id="header-list">
@@ -66,9 +66,15 @@ export const createHeader = () => {
     const userId = localStorage.getItem("userId");
     const accessToken = localStorage.getItem("accessToken");
     const isAuthenticated = userId && accessToken;
-    if(isAuthenticated){
+    if (isAuthenticated) {
         header.querySelector("#header-login-link-container").style.display = "none";
         header.querySelector("#header-register-link-container").style.display = "none";
+    }
+
+    // Si no esta logueado, no mostrar el perfil
+
+    if (!isAuthenticated) {
+        header.querySelector("#header-profile-link-container").style.display = "none";
     }
 
     return header; // Devuelve el elemento del header

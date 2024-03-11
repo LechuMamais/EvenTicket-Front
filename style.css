@@ -26,3 +26,9 @@ body{
   min-height: 100svh;
 }
 
+#app{
+  display: flex;
+  flex-direction: column;
+
+
+}

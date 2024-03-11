@@ -6,7 +6,7 @@ export const createRegistrationForm = () => {
     const form = document.createElement("form");
     form.id = "registration-form";
     form.innerHTML = `
-        <h2>Registro de Usuario</h2>
+        <h2>Crear Usuario</h2>
         <label for="userName">Nombre de usuario:</label><br>
         <input type="text" id="userName" name="userName"><br>
         
@@ -44,13 +44,17 @@ export const createRegistrationForm = () => {
             const data = await response.json();
 
             // Acá ya sería saltar al login, y rescatar la informacion.
-            createLoginForm(data.email)
-            /*form.reset();*/
+            const mainContainer = document.querySelector("#main-container");
+            mainContainer.innerHTML = "";
+            mainContainer.appendChild(createLoginForm(data.email));
         } catch (error) {
             console.error("Error al registrar usuario:", error.message);
             alert("Error al registrar usuario");
         }
     });
 
-    return form;
+    const registrationFormContainer = document.createElement('div');
+    registrationFormContainer.id ='registration-form-container';
+    registrationFormContainer.appendChild(form);
+    return registrationFormContainer;
 }

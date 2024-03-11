@@ -1,4 +1,15 @@
 .events-container{
+    width: 90%;
+    padding: 3rem 0;
+}
+
+#event-title-container>h3{
+    font-size: 30px;
+    padding-bottom: 2px;
+    border-bottom: solid 1px rgb(211, 211, 211);
+}
+
+.events-card-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

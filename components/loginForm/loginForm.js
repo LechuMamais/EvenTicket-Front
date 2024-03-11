@@ -7,6 +7,7 @@ export const createLoginForm = () => {
     form.id = "login-form";
     form.setAttribute("autocomplete", "on");
     form.innerHTML = `
+        <h2>Iniciar Sesión</h2>
         <label for="userName">Nombre de usuario:</label>
         <input type="text" id="userName" name="userName">
         
@@ -66,5 +67,9 @@ export const createLoginForm = () => {
         }
     });
 
-    return form;
+    const formContainer = document.createElement("div");
+    formContainer.id = "login-form-container";
+    formContainer.appendChild(form);
+
+    return formContainer;
 }
