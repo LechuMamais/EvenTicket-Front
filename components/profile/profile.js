@@ -10,6 +10,8 @@ import { showEvents } from '../events/events';
 import { ShowEventList } from '../showEventList/showEventList';
 
 export const createProfile = async () => {
+    window.scrollTo({ top: 0}); // Asegurarnos de que el scroll esté arriba del todo en la pag
+
     const userId = localStorage.getItem("userId");
 
     if (userId == null) {
@@ -120,8 +122,10 @@ export const createProfile = async () => {
             const userEventsAsOrganizerContainer = document.querySelector('#user-events-as-organizer-container');
             // Si la lista está vacia indicarlo en un texto
             if (userData.eventsAsOrganizer.length === 0) {
+                const eventsAsOrganizerList = document.getElementById('events-as-organizer-list');
+                eventsAsOrganizerList.style.display = 'none';
                 const noEventsAsOrganizer = document.createElement('h4');
-                noEventsAsOrganizer.textContent = 'No tienes eventos organizados!';
+                noEventsAsOrganizer.textContent = 'No estás organizando ningún evento.';
                 userEventsAsOrganizerContainer.appendChild(noEventsAsOrganizer);
             }
             userEventsAsOrganizerContainer.appendChild(createNewEventButton);
@@ -129,6 +133,8 @@ export const createProfile = async () => {
             const userEventsAsAssistantContainer = document.querySelector('#user-events-as-assistant-container');
             // Si la lista está vacia indicarlo en un texto
             if (userData.eventsAsAttendee.length === 0) {
+                const eventsAsAssistantList = document.getElementById('events-as-assistant-list');
+                eventsAsAssistantList.style.display = 'none';
                 const noEventsAsAttendee = document.createElement('h4');
                 noEventsAsAttendee.textContent = 'Aún no tienes eventos en tu calendario!';
                 userEventsAsAssistantContainer.appendChild(noEventsAsAttendee);

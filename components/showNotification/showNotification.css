@@ -1,6 +1,6 @@
 .notification-container {
     position: fixed;
-    top: 20px;
+    top: 100px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #333;
@@ -11,10 +11,16 @@
     z-index: 9999;
 }
 
-.new-event-created {
-    background-color: #02aa21;
+
+.notification-error-login{
+    background-color: var(--color-important);
 }
 
+.notification-new-event-created {
+    background-color: var(--color-medium);
+}
+
+/*
 .notification-success {
     background-color: #28a745;
 }
@@ -26,3 +32,4 @@
 .notification-error {
     background-color: #dc3545;
 }
+*/

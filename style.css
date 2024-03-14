@@ -3,14 +3,24 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  
+  
+  --color-white: #f5f3f5e5;
+  --color-light: #82A5C8;
+  --color-medium: #427DB3;
+  --color-important: #9E645A;
+  --color-dark: #000000;
+  
+  color-scheme: light dark;
+  color: var(--color-white);
+  background-color: var(--color-dark);
+  
 }
 
 * {
@@ -22,13 +32,16 @@
 }
 
 body{
-  background-color: rgb(0, 0, 0);
   min-height: 100svh;
 }
 
 #app{
   display: flex;
   flex-direction: column;
+}
 
+/* ----------------------------------------------------------------CUSTOM FLATPICKR---------------------------------------------------------------------*/
 
+.flatpickr-calendar .selected{
+  background-color: var(--color-medium) !important;
 }

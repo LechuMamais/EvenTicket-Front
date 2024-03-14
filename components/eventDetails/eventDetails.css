@@ -16,6 +16,11 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+
+    /*Esto es para el efecto Parallax*/
+    background-color: black;
+    position: relative;
+    overflow: hidden;
 }
 
 #auth-required>h4,
@@ -29,12 +34,15 @@
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center
-}
-
-.image-element-container{
+    align-items: center;
     background-size: cover;
     background-position: center;
+}
+.image-element-container img{
+    display: block;
+    width: 100%;
+    height: auto;
+    pointer-events: none; /* Evita que la imagen interfiera con el scroll */
 }
 
 .image-element-container>h2{

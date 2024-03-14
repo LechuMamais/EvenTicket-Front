@@ -1,6 +1,5 @@
 import { NEW_EVENTS_URL } from "../../utils/apiUrls";
 import { createProfile } from "../profile/profile";
-import moment from "moment";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import "flatpickr/dist/themes/dark.css";

@@ -44,10 +44,12 @@
 #user-events-as-organizer-container,
 #user-events-as-assistant-container {
     width: 45%;
+    min-width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
+    padding: 1rem 0rem;
 }
 
 #events-as-organizer-list,
@@ -64,6 +66,7 @@
 /*TEXTO*/
 #user-events-container h2{
     font-size: 22px;
+    font-weight: normal;
     padding-bottom: 2px;
     border-bottom: solid 1px rgb(211, 211, 211);
 }

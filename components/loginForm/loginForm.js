@@ -1,5 +1,6 @@
 import { LOGIN_URL } from "../../utils/apiUrls";
 import { createRegistrationForm } from "../registrationForm/registrationForm"; // Importa la función para crear el formulario de registro
+import { showNotification } from "../showNotification/showNotification";
 import "./loginForm.css";
 
 export const createLoginForm = () => {
@@ -63,7 +64,8 @@ export const createLoginForm = () => {
             //form.reset();
         } catch (error) {
             console.error("Error al iniciar sesión:", error.message);
-            alert("Error al iniciar sesión");
+            // Mostrar un mensaje de error
+            await showNotification("Error al iniciar sesion.", "error-login", 100000);
         }
     });
 

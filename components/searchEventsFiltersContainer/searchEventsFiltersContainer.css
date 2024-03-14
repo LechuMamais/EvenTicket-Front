@@ -1,0 +1,46 @@
+#search-events-filters-container {
+    position: sticky;
+    top: 60px;
+    width: 100%;
+    max-width: 1000px;
+    background-color: var(--color-dark);
+    z-index: 110;
+    padding: 2rem 0rem 1rem 0rem;
+}
+
+#filter-by-date-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0rem;
+}
+
+/* Para la animación de esconderse detras del elemento que está arriba */
+#filter-by-date-container {
+    z-index: 1;
+    position: fixed;
+    transition: transform 0.3s ease-in-out;
+}
+
+.filter-hidden {
+    transform: translateY(-100%);
+    z-index: -1;
+}
+
+#filter-by-date-container input[type="text"] {
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+#filter-by-date-container input[type="text"]:focus {
+    transition: all 0.2s; 
+    border-color: var(--color-medium); 
+    outline: none;
+}
+#filter-by-date-container button{
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s; 
+    cursor: pointer;
+}
