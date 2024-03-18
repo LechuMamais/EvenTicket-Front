@@ -3,6 +3,7 @@ import { createLoginForm } from "../loginForm/loginForm";
 import { createRegistrationForm } from "../registrationForm/registrationForm";
 import { createProfile } from "../profile/profile";
 import { showEvents } from "../events/events";
+import { home } from "../home/home";
 
 export const createHeader = () => {
     const userName = localStorage.getItem("userName");
@@ -10,6 +11,9 @@ export const createHeader = () => {
     const header = document.createElement("header");
     header.innerHTML = `
         <ul id="header-list">
+            <li id="header-home-link-container" class="header-list-link link-container">
+                <a id="home-link">Home</a>
+            </li>
             <li id="header-login-link-container" class="header-list-link link-container">
                 <a id="login-link">Login</a>
             </li>
@@ -26,6 +30,13 @@ export const createHeader = () => {
     `;
 
     // Agregar event listeners
+    const homeLink = header.querySelector("#home-link");
+    homeLink.addEventListener("click", () => {
+        const divApp = document.querySelector("#app");
+        divApp.innerHTML = "";
+        divApp.appendChild(home());
+    });
+
     const loginLink = header.querySelector("#login-link");
     loginLink.addEventListener("click", () => {
         const mainContainer = document.querySelector("#main-container");

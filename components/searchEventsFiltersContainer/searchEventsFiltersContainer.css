@@ -1,12 +1,12 @@
 #search-events-filters-container {
     position: sticky;
-
     top: 60px;
-    width: 100%;
-    max-width: 1000px;
+    width: 100vw;
+    max-width: 1100px;
     background-color: var(--color-dark);
     z-index: 80;
-    padding: 2rem 0rem 1rem 0rem;
+    padding: 0rem 50px 0.5rem 50px;
+    /*box-shadow: 100px 100px 1170px -1107px rgba(255, 255, 255, 0.75);*/
 }
 
 #filter-by-date-container {
@@ -15,26 +15,32 @@
     justify-content: flex-start;
     align-items: center;
     gap: 1rem;
-    padding: 1rem 0rem;
+    padding: 0.5rem;
     z-index: 10;
     background-color: var(--color-dark);
-
+    margin-left: -50px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 /* Para la animación de esconderse detras del elemento que está arriba */
 #filter-by-date-container {
-
     position: absolute;
     z-index: 1;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease;
 }
 #event-title-container{
+    width: 100%;
     position: relative;
     z-index: 120;
     background-color: var(--color-dark);
-    height: 80px;
     padding-top: 0;
 }
+#event-title-container>h3{
+    width: 100%;
+    line-height: 82px;
+}
+
 
 .filter-hidden {
     transform: translateY(-100%);
@@ -44,6 +50,8 @@
 #filter-by-date-container input[type="text"] {
     padding: 0.5rem;
     border-radius: 4px;
+    color: var(--color-white);
+    background-color: var(--color-dark);
 }
 
 #filter-by-date-container input[type="text"]:focus {
@@ -52,8 +60,12 @@
     outline: none;
 }
 #filter-by-date-container button{
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: all 0.2s; 
-    cursor: pointer;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    width: auto;
+}
+#filter-by-date-container button:hover{
+    background-color: rgb(215, 215, 215);
+    color: var(--color-white);
+
 }

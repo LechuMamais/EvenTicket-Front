@@ -68,10 +68,10 @@
     font-size: 22px;
     font-weight: normal;
     padding-bottom: 2px;
-    border-bottom: solid 1px rgb(211, 211, 211);
+    border-bottom: solid 1px var(--color-white);
 }
 
-/*BOTONES*/
+/*BOTONES
 #user-options-container >button,
 #user-events-as-organizer-container>button,
 #user-events-as-assistant-container>button {
@@ -79,7 +79,7 @@
     width: 200px;
     padding: 8px 14px;
     margin: 1rem 0;
-}
+}*/
 
 #logOut-button {
     width: 70px !important;

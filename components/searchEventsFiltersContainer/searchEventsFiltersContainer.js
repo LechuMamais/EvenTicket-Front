@@ -82,16 +82,28 @@ export const searchEventsFiltersContainer = async () => {
 
     // Manejar evento click del botón de búsqueda
     searchButton.addEventListener('click', async () => {
-        const fromDate = fromDateInput.value;
+        var fromDate = fromDateInput.value;
         const toDate = toDateInput.value;
 
         try {
             // Realizar la solicitud GET a la API con los filtros de fecha
+            console.log(fromDate)
+            if (fromDate === '') {
+                // Obtener la fecha actual en formato ISO (YYYY-MM-DD)
+                fromDate = new Date().toISOString().split('T')[0];
+            }
             const response = await fetch(`${EVENTS_URL}?fromDate=${fromDate}&toDate=${toDate}`);
             if (!response.ok) {
                 throw new Error('Error al obtener los eventos');
             }
             const eventsData = await response.json();
+
+            // Convertir las fechas de cadena a objetos Date para poder ordenarlos
+            eventsData.forEach(event => {
+                event.date = new Date(event.date);
+            });
+            // Ordenar los eventos por fecha
+            eventsData.sort((a, b) => a.date - b.date);
 
             // Mostrar los eventos en el DOM
             const eventsCardContainer = document.querySelector('.events-card-container');

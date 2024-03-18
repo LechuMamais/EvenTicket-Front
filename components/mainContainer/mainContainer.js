@@ -1,5 +1,6 @@
 import { CHECK_LOGGED_URL } from '../../utils/apiUrls';
 import { showEvents } from '../events/events';
+import { heroContainer } from '../heroContent/heroContent';
 import { createLoginForm } from '../loginForm/loginForm';
 import './mainContainer.css';
 
@@ -34,7 +35,9 @@ export function mainContainer() {
                     mainContainer.appendChild(loginForm);
                 } else {
                     // Si son correctos significa que el user está logueado, entonces mostramos los eventos
+                    const hero = await heroContainer(mainContainer)
                     const events = await showEvents();
+                    mainContainer.appendChild(hero);
                     mainContainer.appendChild(events);
                 }
 

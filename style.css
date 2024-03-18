@@ -11,11 +11,11 @@
   
   
   
-  --color-white: #f5f3f5e5;
+  --color-dark: #e6e6e6;
   --color-light: #82A5C8;
   --color-medium: #427DB3;
   --color-important: #9E645A;
-  --color-dark: #000000;
+  --color-white: #000000;
   
   color-scheme: light dark;
   color: var(--color-white);
@@ -38,6 +38,16 @@ body{
 #app{
   display: flex;
   flex-direction: column;
+}
+
+/*BOTONES*/
+button{
+  cursor: pointer;
+  border-radius: 4px;
+  width: 200px;
+  padding: 8px 14px;
+  margin: 1rem 0;
+  transition: all 0.2s; 
 }
 
 /* ----------------------------------------------------------------CUSTOM FLATPICKR---------------------------------------------------------------------*/

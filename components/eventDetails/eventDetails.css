@@ -18,7 +18,7 @@
     flex-direction: column;
 
     /*Esto es para el efecto Parallax*/
-    background-color: black;
+    background-color: var(--color-dark);
     position: relative;
     overflow: hidden;
 }
