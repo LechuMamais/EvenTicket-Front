@@ -15,27 +15,30 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
 lua
 
 src/
-|-- components/                          # Componentes reutilizables
-|   |-- createNewEventForm               # Componente de formulario de crear nuevo evento
-|   |-- eventDetails.js                  # Componente del detalles de un evento
-|   |-- events                           # Componente que muestra la lista de eventos y filtros de busqueda
-|   |-- footer                           # Componente que muestra el footer de la aplicación
-|   |-- header                           # Componente del encabezado
-|   |-- heroContent                      # Componente del hero de la aplicación
-|   |-- home                             # Componente del home de la aplicación
-|   |-- loginForm                        # Componente de formulario de login
-|   |-- mainContainer                    # Componente de contanedor principal de la aplicación
-|   |-- profile                          # Componente de perfil de usuario
-|   |-- registrationForm                 # Componente de formulario de registro
-|   |-- searchEventsFiltersContainer     # Componente de filtros de busqueda
-|   |-- showEventCard                    # Componente de tarjeta de evento
-|   |-- showEventList                    # Componente de lista de tarjetas de eventos
-|   |-- updateEventForm                  # Componente de actualizar datos de un evento
-|   |-- updateProfileForm                # Componente de actualizar datos de un usuario
-|-- utils/                   # Utilidades y funciones auxiliares
-|   |-- apiUrls.js           # Aquí se almacenan las urls donde se harán las peticiones
-|-- App.js                   # Componente principal de la aplicación
-|-- index.js                 # Punto de entrada de la aplicación
+|-- components/                              # Componentes reutilizables
+|   |-- eventss                              # Componentes relacionados a la gestion de eventos
+|   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
+|   |-- |-- eventDetails.js                  # Componente del detalles de un evento
+|   |-- |-- events                           # Componente que muestra la lista de eventos y filtros de busqueda
+|   |-- |-- searchEventsFiltersContainer     # Componente de filtros de busqueda
+|   |-- |-- showEventCard                    # Componente de tarjeta de evento
+|   |-- |-- showEventList                    # Componente de lista de tarjetas de eventos
+|   |-- |-- updateEventForm                  # Componente de actualizar datos de un evento
+|   |-- global                               # Componentes globales
+|   |-- |-- footer                           # Componente que muestra el footer de la aplicación
+|   |-- |-- header                           # Componente del encabezado
+|   |-- |-- heroContent                      # Componente del hero de la aplicación
+|   |-- |-- home                             # Componente del home de la aplicación
+|   |-- |-- mainContainer                    # Componente de contanedor principal de la aplicación
+|   |-- users                                # Componentes relacionados a la gestion de usuarios
+|   |-- |-- loginForm                        # Componente de formulario de login
+|   |-- |-- profile                          # Componente de perfil de usuario
+|   |-- |-- registrationForm                 # Componente de formulario de registro
+|   |-- |-- updateProfileForm                # Componente de actualizar datos de un usuario
+|-- utils/                                   # Utilidades y funciones auxiliares
+|   |-- apiUrls.js                           # Aquí se almacenan las urls donde se harán las peticiones
+|-- App.js                                   # Componente principal de la aplicación
+|-- index.js                                 # Punto de entrada de la aplicación
 
 Funcionalidades Principales
 

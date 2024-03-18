@@ -1,7 +1,7 @@
 import './style.css'
-import { createHeader } from './components/header/header'
-import { mainContainer } from './components/mainContainer/mainContainer';
-import { createFooter } from './components/footer/footer';
+import { createHeader } from './components/global/header/header'
+import { mainContainer } from './components/global/mainContainer/mainContainer';
+import { createFooter } from './components/global/footer/footer';
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");
