@@ -24,7 +24,6 @@ export function heroContainer() {
     // Función para ajustar el tamaño del título y el contenido debajo
     const adjustTitleSize = () => {
         scrollPosition = window.scrollY;
-        console.log(scrollPosition);
         const heroHeight = hero.offsetHeight;
         const maxTitleSize = 500; // Tamaño máximo del título en px
         const minTitleSize = 100; // Tamaño mínimo del título en px
@@ -56,7 +55,6 @@ export function heroContainer() {
             title.style.top = `${600}px`;
             // Para que el events container se muestre correctamente, debemos fijarle una altura fija en relacion al scroll position
             const eventsContainer = document.querySelector('.events-container');
-            console.log(eventsContainer);
             let marginTopValue = hero.offsetHeight -600+ scrollPosition ;
             eventsContainer.style.marginTop = `${marginTopValue}px`;
 
@@ -68,8 +66,7 @@ export function heroContainer() {
             heroContainer.style.top = `${-scrollPosition+60}px`;
             const eventCardContainer = document.querySelector('.events-card-container');
             if(eventCardContainer){
-                eventCardContainer.style.marginTop = `60px`;
-                console.log(eventCardContainer.style.marginTop);
+                eventCardContainer.style.marginTop = `0px`;
             }
         }
     };
