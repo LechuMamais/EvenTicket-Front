@@ -1,6 +1,5 @@
 import './heroContent.css';
 
-import './heroContent.css';
 
 export function heroContainer() {
     // Crear contenedor principal del héroe
@@ -14,7 +13,7 @@ export function heroContainer() {
 
     // Crear título INSOMNIA
     const title = document.createElement('h1');
-    title.textContent = 'INSOMNIA';
+    title.textContent = 'EVENTICKET';
     title.classList.add('hero-title');
     hero.appendChild(title);
 
@@ -27,40 +26,52 @@ export function heroContainer() {
         scrollPosition = window.scrollY;
         console.log(scrollPosition);
         const heroHeight = hero.offsetHeight;
-        console.log(heroHeight);
         const maxTitleSize = 500; // Tamaño máximo del título en px
         const minTitleSize = 100; // Tamaño mínimo del título en px
         const titleSize = Math.max(maxTitleSize - (scrollPosition * 0.8), minTitleSize); // Calcular tamaño del título
         // Que además de achicarse, el título baje para que se siga viendoo como si estuviese fijo
-        /*
-        */
 
         // Aplicar tamaño al título
         title.style.fontSize = `${titleSize}px`;
         //let titleTop = scrollPosition*1.2
         let titleTop;
-        title.style.position = 'fixed';
-        const topCorrectionFactor = 1.3
+        title.style.position = 'fixed'; 
+        const topCorrectionFactor = 1
         if(scrollPosition<=376){
             titleTop = scrollPosition*topCorrectionFactor;
+            title.style.top = `${titleTop}px`;
+
+        }else{
+            titleTop = scrollPosition
 
             title.style.top = `${titleTop}px`;
+            
+            //heroContainer.style.top = `${heroHeight}px`;
         }
-        // Fijar el contenido debajo del título
-        /*if (scrollPosition <= heroHeight) {
-            // Deshabilitar el desplazamiento del cuerpo
-            document.body.style.overflow = 'hidden';
-            window.scrollTo(0, 0);
-            //window.scrollY=0
-        } else {
-            // Habilitar el desplazamiento del cuerpo
-            document.body.style.overflow = 'auto';
-        }*/
-        /*if (titleSize <= minTitleSize) {
-            // Si el tamaño de la fuente alcanza el mínimo, fija el contenido debajo del título
-            const contentBelowTitle = document.querySelector('#main-container');
-            contentBelowTitle.classList.add('fixed-content');
-        }*/
+        
+        // Vamos a hacer que el hero, al llegar a cierto nivel de scroll, pase a estar fijo en la parte de arriba con INSOMNIA a la vista
+        if(scrollPosition >= 600){
+            heroContainer.style.position = 'fixed';
+            heroContainer.style.top = `-540px`;
+            title.style.top = `${600}px`;
+            // Para que el events container se muestre correctamente, debemos fijarle una altura fija en relacion al scroll position
+            const eventsContainer = document.querySelector('.events-container');
+            console.log(eventsContainer);
+            let marginTopValue = hero.offsetHeight -600+ scrollPosition ;
+            eventsContainer.style.marginTop = `${marginTopValue}px`;
+
+            // Y que el contenedor de las tarjetas de eventos sí se mueva.
+            const eventCardContainer = document.querySelector('.events-card-container');
+            eventCardContainer.style.marginTop = `${-scrollPosition+600}px`;
+        }else if(scrollPosition<=600){
+            //heroContainer.style.position = 'static';
+            heroContainer.style.top = `${-scrollPosition+60}px`;
+            const eventCardContainer = document.querySelector('.events-card-container');
+            if(eventCardContainer){
+                eventCardContainer.style.marginTop = `60px`;
+                console.log(eventCardContainer.style.marginTop);
+            }
+        }
     };
     // Agregar efecto de ajuste de tamaño al hacer scroll
     window.addEventListener('scroll', adjustTitleSize);

@@ -39,33 +39,7 @@ export const showEvents = async () => {
         // Iterar sobre los eventos ordenados y crear una tarjeta para cada uno
         eventsData.forEach((event, index) => {
             const eventCard = showEventCard(event);
-            eventCard.style.transition = 'background-position-y 0s ease-in-out'; // Agregar transición CSS
-        
-            let initialScrollPosition = null; // Variable para almacenar la posición de desplazamiento inicial
-            let parallaxFactor = 0.15; // Factor de parallax inicial
-        
-            // Función para manejar el evento de scroll
-            const handleScroll = () => {
-                const scrollPosition = window.scrollY;
-        
-                // Si es el primer scroll, establecer la posición de desplazamiento inicial
-                if (initialScrollPosition === null) {
-                    initialScrollPosition = scrollPosition;
-                }
-        
-                // Calcular el desplazamiento relativo de la tarjeta de evento respecto a la posición de desplazamiento inicial
-                const relativeScrollPosition = scrollPosition - initialScrollPosition;
-        
-                // Ajustar la velocidad del parallax según el desplazamiento relativo
-                const parallaxOffset = relativeScrollPosition * parallaxFactor;
-        
-                // Aplicar el efecto parallax a la imagen de fondo de la tarjeta de evento
-                eventCard.style.backgroundPositionY = `calc(50% + ${parallaxOffset}px)`;
-            };
-        
-            // Agregar el evento de scroll
-            window.addEventListener('scroll', handleScroll);
-        
+            
             // Agregar la tarjeta de evento al contenedor
             eventsCardContainer.appendChild(eventCard);
         });

@@ -83,7 +83,7 @@ updateProfileForm
 ShowEvents
     Muestra una lista tarjetas EventCard de eventos disponibles (no eventos pasados) y un filtro para buscar eventos cuya fecha
 esté comprendido entre las dos fechas indicadas. Si no se indica alguna de las fechas, tomará como fecha fromDate 01/01/1970 y como
-toDate 12/12/2999
+toDate 12/12/2999 En este component se aplica un efecto Parallax a las tarjetas.
 
 searchEventsFiltersContainer
     Contiene los filtros de busqueda

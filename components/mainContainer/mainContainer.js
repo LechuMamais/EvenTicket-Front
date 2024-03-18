@@ -39,7 +39,7 @@ export function mainContainer() {
                     const events = await showEvents();
                     mainContainer.appendChild(hero);
                     mainContainer.appendChild(events);
-                }
+                }   
 
             } catch {
                 // Si hay algun error en el bloque try, mandamos al usuario al login
