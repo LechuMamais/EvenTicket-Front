@@ -4,7 +4,7 @@ import { showEventCard } from "../showEventCard/showEventCard.js";
 import { searchEventsFiltersContainer } from "../searchEventsFiltersContainer/searchEventsFiltersContainer.js";
 
 export const showEvents = async () => {
-    window.scrollTo({ top: 0}); // Asegurarnos de que el scroll esté arriba del todo en la pag
+    window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     try {
         // PETICION a la API:
         // Obtener la fecha actual en formato ISO (YYYY-MM-DD)
@@ -39,12 +39,64 @@ export const showEvents = async () => {
         // Iterar sobre los eventos ordenados y crear una tarjeta para cada uno
         eventsData.forEach((event, index) => {
             const eventCard = showEventCard(event);
-            
+
             // Agregar la tarjeta de evento al contenedor
             eventsCardContainer.appendChild(eventCard);
         });
-        
+
         eventsContainer.appendChild(eventsCardContainer);
+
+
+        //  -----------------------------------     EVENTS CONTAINER MODIFIER     -------------------------------- //
+
+        // Si a la vez que se visualiza el hero también hay un events container debajo, vamos a darle margen suficiente para que quepa
+        console.log(eventsContainer);
+
+
+        var heroContainerPreviousHeight
+        // Funcion de ajustarle el margin top al eventsContainer para que se ubique debajo del hero.
+        const eventsContainerMarginTop = () => {
+            console.log('Modificando events container margin top')
+            const heroContainer = document.querySelector('.hero-container');
+            const heroContainerActualHeight = heroContainer.offsetHeight;
+            console.log(heroContainer);
+            const headerHeight = document.querySelector('header').offsetHeight;
+            console.log(headerHeight);
+            const headerAndHeroHeight = heroContainerActualHeight + headerHeight;
+            const scrollPosition = window.scrollY;
+
+            console.log(scrollPosition);
+            if(heroContainerActualHeight < heroContainerPreviousHeight){
+                console.log('Estas scrolleando hacia abajo');
+                eventsContainer.style.marginTop = `${headerAndHeroHeight+scrollPosition}px`;
+            }else if(heroContainerActualHeight > heroContainerPreviousHeight){
+                console.log('Estas scrolleando hacia arriba')
+                eventsContainer.style.marginTop = `${headerAndHeroHeight+scrollPosition}px`;
+            }
+
+            heroContainerPreviousHeight= heroContainerActualHeight
+        }
+
+        //Fijar el contenedor de filtros, si es que hay hero, en relacion al scroll.
+        const filtersContainerFixed = () =>{
+            const searchEventsFiltersContainer = document.querySelector('#search-events-filters-container');
+            console.log(searchEventsFiltersContainer)
+            if(searchEventsFiltersContainer){
+                const heroContainerHeight = document.querySelector('.hero-container').offsetHeight;
+                searchEventsFiltersContainer.style.marginTop =searchEventsFiltersContainer.offsetTop + heroContainerHeight + 'px';
+                console.log(searchEventsFiltersContainer.style.marginTop)
+            }
+        }
+
+        // Que eventsContainerMarginTop se ejecute solo si está cargado eventsContainer, y si hay tambien heroContainer visualizandose.
+        window.addEventListener('scroll', () => {
+            const heroContainer = document.querySelector('.hero-container');
+            if (eventsContainer && heroContainer) {
+                eventsContainerMarginTop();
+                //filtersContainerFixed();
+            }
+        });
+
 
         // Agregar el contenedor de eventos al DOM
         return eventsContainer;

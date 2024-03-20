@@ -44,6 +44,8 @@ export const searchEventsFiltersContainer = async () => {
     searchEventsFiltersContainer.appendChild(filterByDateContainer);
 
     // Efectos de SCROLL de FILTER BY DATE CONTAINER - tiene tambien css
+    // Lo que queremos es que al hacere scroll hacia abajo se oculte el contenedor de filtros
+    // y que se muestre al hacer scroll hacia arriba.
     // Obtiene la posición inicial de la página al cargar
     let lastScrollPosition = window.pageYOffset;
 
@@ -51,14 +53,25 @@ export const searchEventsFiltersContainer = async () => {
     window.addEventListener('scroll', () => {
         // Obtiene la posición actual de la página al hacer scroll
         const currentScrollPosition = window.pageYOffset;
-
+        const eventCardContainer = document.querySelector('.events-card-container');
+        
         // Comprueba si el usuario está haciendo scroll hacia abajo
         if (currentScrollPosition > lastScrollPosition) {
             // Si está haciendo scroll hacia abajo, oculta el elemento #filter-by-date-container
             filterByDateContainer.classList.add('filter-hidden');
+            if(eventCardContainer){
+                console.log('Abajo: Hay event card container')
+                eventCardContainer.style.marginTop = '0px';
+                console.log(eventCardContainer.style.marginTop)
+            }
         } else {
             // Si está haciendo scroll hacia arriba, muestra el elemento #filter-by-date-container
             filterByDateContainer.classList.remove('filter-hidden');
+            if(eventCardContainer){
+                console.log('Arriba: Hay event card container')
+                eventCardContainer.style.marginTop = '76px';
+                console.log(eventCardContainer)
+            }
         }
 
         // Actualiza la última posición de desplazamiento con la posición actual
