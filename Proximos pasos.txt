@@ -48,6 +48,8 @@ Mejoras hechas:
 
 Próximas mejoras:
 
+- Terminar con los minibugs del listado de eventos
+
 - Hacer un calendario de eventos a los que el usuario va como asistente.
 
 - Cuentas de usuarios, cuentas de organizadores, cuentas de administradores.

@@ -43,9 +43,9 @@ export function mainContainer() {
 
             } catch {
                 // Si hay algun error en el bloque try, mandamos al usuario al login
-                localStorage.clear()
+                /*localStorage.clear()
                 const loginForm = await createLoginForm();
-                mainContainer.appendChild(loginForm);
+                mainContainer.appendChild(loginForm);*/
             }
         } else {
             const loginForm = await createLoginForm();

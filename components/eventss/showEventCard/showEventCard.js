@@ -29,10 +29,7 @@ export const showEventCard = (event) => {
     // Agregar transición CSS
     eventCard.style.transition = 'background-position-y 0s ease-in-out';
 
-    // Variable para almacenar la posición de desplazamiento inicial
-    let initialScrollPosition;
-
-    // Función para manejar el evento de scroll
+    // Función para manejar el evento de scroll y generar el ----------------------------- efecto PARALLAX -----------------------------
     const handleScroll = () => {
         // Necesitamos que cuando la card del evento esté en el centro de la pantalla, backgroundPositionY sea 50%
         // Para eso, parallaxOffset tiene que ser 0, y para eso relativeScrollPosition = 0
