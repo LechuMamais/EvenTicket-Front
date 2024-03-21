@@ -24,7 +24,8 @@ export function mainContainer() {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${accessToken}`
+                        "Authorization": `Bearer ${accessToken}`,
+                        "Origin": "http://localhost:5173" // Especifica el origen de la solicitud
                     },
                 })
 
