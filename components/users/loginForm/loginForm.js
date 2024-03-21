@@ -41,7 +41,8 @@ export const createLoginForm = () => {
             const response = await fetch(LOGIN_URL, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json", // Asegúrate de incluir el Content-Type correcto
+                    "Origin": "http://localhost:5173" // Especifica el origen de la solicitud
                 },
                 body: JSON.stringify(formData)
             });
