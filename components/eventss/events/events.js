@@ -15,6 +15,7 @@ export const showEvents = async () => {
             throw new Error('Error al obtener los eventos');
         }
         const eventsData = await response.json();
+        console.log(eventsData);
 
         // Convertir las fechas de cadena a objetos Date
         eventsData.forEach(event => {

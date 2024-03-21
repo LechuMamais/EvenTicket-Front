@@ -1,6 +1,7 @@
 // Acá están todas las urls que usamos en los fetch para comunicar con la base de datos.
 
-export const BASE_URL = 'http://localhost:3000/api';
+export const BASE_URL = 'http://even-ticket-j1bwy96gt-lechumamais-projects.vercel.app';
+// Local: 'http://localhost:3000'
 
 export const EVENTS_URL = `${BASE_URL}/events`;
 export const NEW_EVENTS_URL = `${EVENTS_URL}/newEvent`;
