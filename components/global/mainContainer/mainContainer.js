@@ -1,10 +1,23 @@
 import { createLoginForm } from '../../users/loginForm/loginForm';
 import { CHECK_LOGGED_URL } from '../../../utils/apiUrls';
-import './mainContainer.css';
 import { showEvents } from '../../eventss/events/events';
 import { heroContainer } from '../heroContent/heroContent';
+import { makeRequest } from '../../../utils/api';
+import './mainContainer.css';
 
-export function mainContainer() {
+// Función para realizar el fetch y obtener los datos del usuario
+async function fetchUserData(userId, accessToken) {
+    try {
+        const response = await makeRequest(`${CHECK_LOGGED_URL}/${userId}`, 'GET', null, {"Content-Type": "application/json", "Authorization": `Bearer ${accessToken}`});
+        return response;
+    } catch (error) {
+        // Captura y maneja cualquier error en la solicitud fetchUserData
+        throw new Error(`Error en la solicitud a ${CHECK_LOGGED_URL}/${userId}: ${error.message}`);
+    }
+}
+
+// Función principal del componente
+export function mainContainer(userName = '') {
     const mainContainer = document.createElement('main');
     mainContainer.id = 'main-container';
 
@@ -14,43 +27,31 @@ export function mainContainer() {
 
     // Definir una función async para cargar el contenido del contenedor principal
     async function loadContent() {
-        if (userId && accessToken) {
+        if (!userId || !accessToken) {
+            // Si no hay userId o accessToken, borramos el localStorage (para limpiar cualquier dato de sesion)
+            // Y mostramos el formulario de login
+            const loginForm = await createLoginForm(userName);
+            mainContainer.appendChild(loginForm);
+        } else {
             // Si hay userId y accessToken tenemos que chequear que sean correctos.
             // Para eso tenemos una ruta que recibe userId y accessToken, chequea que el user esté
             // Autenticado, y devuelve sus datos.
             // Utiliza el mismo controller que getUserById, pero con el middleware de autenticación.
-            try {
-                const response = await fetch(`${CHECK_LOGGED_URL}/${userId}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${accessToken}`,
-                        "Origin": "http://localhost:5173" // Especifica el origen de la solicitud
-                    },
-                })
 
-                // Si no son correctos, borramos el localStorage y mostramos el login
-                if (!response.ok) {
-                    localStorage.clear()
-                    const loginForm = await createLoginForm();
-                    mainContainer.appendChild(loginForm);
-                } else {
-                    // Si son correctos significa que el user está logueado, entonces mostramos los eventos
-                    const hero = await heroContainer(mainContainer)
-                    const events = await showEvents();
-                    mainContainer.appendChild(hero);
-                    mainContainer.appendChild(events);
-                }   
+            const response = await fetchUserData(userId, accessToken);
 
-            } catch {
-                // Si hay algun error en el bloque try, mandamos al usuario al login
-                /*localStorage.clear()
+            // Si hay algun error en la response, mostramos menmsaje de error
+            if (!response) {
+                localStorage.clear();
                 const loginForm = await createLoginForm();
-                mainContainer.appendChild(loginForm);*/
+                mainContainer.appendChild(loginForm);
+            } else {
+                // Si son correctos significa que el user está logueado, entonces mostramos los eventos
+                const hero = await heroContainer(mainContainer)
+                const events = await showEvents();
+                mainContainer.appendChild(hero);
+                mainContainer.appendChild(events);
             }
-        } else {
-            const loginForm = await createLoginForm();
-            mainContainer.appendChild(loginForm);
         }
     }
 
@@ -58,4 +59,4 @@ export function mainContainer() {
     loadContent();
 
     return mainContainer;
-}  
+}

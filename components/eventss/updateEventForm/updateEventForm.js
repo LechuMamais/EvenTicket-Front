@@ -48,20 +48,14 @@ export const updateEventForm = (eventId, eventData) => {
         };
 
         try {
-            const response = await fetch(`${EVENTS_URL}/${eventId}`, {
-                method: "PUT",
-                headers: {
-                    "Authorization": `Bearer ${accessToken}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
+            
+            const response = await makeRequest(`${EVENTS_URL}/${eventId}`, 'PUT', JSON.stringify(formData));
 
-            if (!response.ok) {
+            if (!response) {
                 throw new Error("Error al actualizar el evento");
             }
         
-            const updatedEvent = await response.json();
+            const updatedEvent = response;
             
             // Volver a los detalles del evento
             const mainContainer = document.querySelector('#main-container');

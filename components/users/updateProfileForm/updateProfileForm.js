@@ -1,6 +1,7 @@
 import './updateProfileForm.css'
 import { createProfile } from "../profile/profile";
 import { USERS_URL } from '../../../utils/apiUrls';
+import { makeRequest } from '../../../utils/api';
 
 export const updateProfileForm = (userData) => {
     // Obtener el userId y el accessToken guardados en localStorage
@@ -32,23 +33,17 @@ export const updateProfileForm = (userData) => {
         };
 
         try {
-            const response = await fetch(`${USERS_URL}/${userId}`, {
-                method: "PUT",
-                headers: {
-                    "Authorization": `Bearer ${accessToken}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
 
-            if (!response.ok) {
+            const response = await makeRequest(`${USERS_URL}/${userId}`, 'PUT', formData)
+
+            if (!response) {
                 throw new Error("Error al actualizar el perfil");
             }
 
             alert("Perfil actualizado correctamente");
             
             // Actualizado el perfil, lo volvemos a mostrar
-            createProfile();
+            window.location.reload();
         } catch (error) {
             console.error("Error al actualizar el perfil:", error.message);
             alert("Error al actualizar el perfil");

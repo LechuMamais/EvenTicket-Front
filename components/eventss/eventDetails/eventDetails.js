@@ -5,24 +5,26 @@ import { createProfile } from "../../users/profile/profile";
 import { createRegistrationForm } from "../../users/registrationForm/registrationForm";
 import { updateEventForm } from "../updateEventForm/updateEventForm";
 import "./eventDetails.css";
+import { makeRequest } from "../../../utils/api";
 
 export const showEventDetails = async (eventId) => {
     window.scrollTo({ top: 0}); // Asegurarnos de que el scroll esté arriba del todo en la pag
 
     try {
         // Obtener los detalles del evento desde la API
-        const response = await fetch(`${EVENTS_URL}/${eventId}`);
-        if (!response.ok) {
+        const response = await makeRequest(`${EVENTS_URL}/${eventId}`, 'GET');
+
+        if (!response) {
             throw new Error('Error al obtener los detalles del evento');
         }
-        const eventData = await response.json();
+        const eventData = response
 
         // Obtener la información del usuario
         const userId = localStorage.getItem("userId");
         const accessToken = localStorage.getItem("accessToken");
         const isAuthenticated = userId && accessToken;
 
-        let userEventsAsAttendee = []; // Inicializar la lista de eventos a los que asistirá el usuario
+        //let userEventsAsAttendee = []; // Inicializar la lista de eventos a los que asistirá el usuario
         let userEventsAsOrganizer = []; // Inicializar la lista de eventos a los que asistirá el usuario
 
 

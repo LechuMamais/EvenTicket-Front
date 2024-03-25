@@ -1,16 +1,17 @@
+import { makeRequest } from "../../../utils/api";
 import { LOGIN_URL } from "../../../utils/apiUrls";
 import { showNotification } from "../../global/showNotification/showNotification";
 import { createRegistrationForm } from "../registrationForm/registrationForm"; // Importa la función para crear el formulario de registro
 import "./loginForm.css";
 
-export const createLoginForm = () => {
+export const createLoginForm = (userName) => {
     const form = document.createElement("form");
     form.id = "login-form";
     form.setAttribute("autocomplete", "on");
     form.innerHTML = `
         <h2>Iniciar Sesión</h2>
         <label for="userName">Nombre de usuario:</label>
-        <input type="text" id="userName" name="userName">
+        <input type="text" id="userName" name="userName" value="${userName}">
         
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password">
@@ -38,21 +39,12 @@ export const createLoginForm = () => {
         };
 
         try {
-            const response = await fetch(LOGIN_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json", // Asegúrate de incluir el Content-Type correcto
-                    "Origin": "http://localhost:5173" // Especifica el origen de la solicitud
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (!response.ok) {
+            const response = await makeRequest(LOGIN_URL, 'POST', formData)
+            if (!response) {
                 throw new Error("Error al iniciar sesión");
             }
-
-            const data = await response.json();
-
+            
+            const data = response;
 
             // Guardar el token de autenticación y el ID del usuario en localStorage
             localStorage.setItem("accessToken", data.token);
@@ -62,11 +54,10 @@ export const createLoginForm = () => {
             // Iniciada la sesión, recargamos, lo que nos lleva a la página de los eventos
 
             window.location.reload();
-            //form.reset();
         } catch (error) {
             console.error("Error al iniciar sesión:", error.message);
             // Mostrar un mensaje de error
-            await showNotification("Error al iniciar sesion.", "error-login", 100000);
+            await showNotification("Error al iniciar sesion.", "error-login", 10000);
         }
     });
 

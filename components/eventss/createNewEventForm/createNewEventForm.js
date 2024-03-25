@@ -1,13 +1,14 @@
 import { NEW_EVENTS_URL } from "../../../utils/apiUrls";
 import flatpickr from "flatpickr";
+import { createProfile } from "../../users/profile/profile";
+import { showNotification } from "../../global/showNotification/showNotification";
 import "flatpickr/dist/flatpickr.min.css";
 import "flatpickr/dist/themes/dark.css";
 import "./createNewEventForm.css";
-import { createProfile } from "../../users/profile/profile";
-import { showNotification } from "../../global/showNotification/showNotification";
+import { makeRequest } from "../../../utils/api";
 
 export const createNewEventForm = () => {
-    console.log('pato');
+    window.scrollTo({ top: 0}); // Asegurarnos de que el scroll esté arriba del todo en la pag
 
     const form = document.createElement("form");
     form.id = "new-event-form";
@@ -44,7 +45,7 @@ export const createNewEventForm = () => {
         event.preventDefault();
         // obtenemos del localShotare los datos de usuario
         const userId = localStorage.getItem("userId");
-        const accessToken = localStorage.getItem("accessToken");
+        //const accessToken = localStorage.getItem("accessToken");
 
         const formData = {
             title: form.querySelector("#title").value,
@@ -54,32 +55,22 @@ export const createNewEventForm = () => {
             img: form.querySelector("#img").value,
             createdBy: userId
         };
-        console.log(formData);
 
         try {
-            // Realizar la solicitud POST al endpoint /api/events para crear un nuevo evento
-            const response = await fetch(`${NEW_EVENTS_URL}/${userId}`, {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${accessToken}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (!response.ok) {
-                throw new Error("Error al crear el evento");
+            const response = await makeRequest(`${NEW_EVENTS_URL}/${userId}`, 'POST', formData);
+            console.log(response);        
+            if (!response) {
+                throw new Error("No se recibió respuesta del servidor");
             }
-
-            const data = await response.json();
-
-            // Mostrar un mensaje de éxito y limpiar el formulario
-            await showNotification("El evento "+data.title+" ha sido creado con éxito", "new-event-created");
+            
+            // Acceder a las propiedades de los datos JSON devueltos por makeRequest
+            await showNotification("El evento "+ response.event.title +" ha sido creado con éxito", "new-event-created");
             createProfile()
         } catch (error) {
             console.error("Error al crear el evento:", error.message);
             alert("Error al crear el evento");
         }
+        
     });
 
     return form;

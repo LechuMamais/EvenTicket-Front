@@ -4,6 +4,7 @@ import "flatpickr/dist/flatpickr.min.css";
 import "flatpickr/dist/themes/dark.css";
 import { EVENTS_URL } from '../../../utils/apiUrls.js';
 import { showEventCard } from "../showEventCard/showEventCard.js";
+import { makeRequest } from "../../../utils/api.js";
 
 export const searchEventsFiltersContainer = async () => {
 
@@ -100,16 +101,16 @@ export const searchEventsFiltersContainer = async () => {
 
         try {
             // Realizar la solicitud GET a la API con los filtros de fecha
-            console.log(fromDate)
             if (fromDate === '') {
                 // Obtener la fecha actual en formato ISO (YYYY-MM-DD)
                 fromDate = new Date().toISOString().split('T')[0];
             }
-            const response = await fetch(`${EVENTS_URL}?fromDate=${fromDate}&toDate=${toDate}`);
-            if (!response.ok) {
+            const response = await makeRequest(`${EVENTS_URL}?fromDate=${fromDate}&toDate=${toDate}`, 'GET');
+
+            if (!response) {
                 throw new Error('Error al obtener los eventos');
             }
-            const eventsData = await response.json();
+            const eventsData = response
 
             // Convertir las fechas de cadena a objetos Date para poder ordenarlos
             eventsData.forEach(event => {

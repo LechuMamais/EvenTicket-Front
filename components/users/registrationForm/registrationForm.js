@@ -1,3 +1,4 @@
+import { makeRequest } from "../../../utils/api";
 import { REGISTER_URL } from "../../../utils/apiUrls";
 import { createLoginForm } from "../loginForm/loginForm";
 import "./registrationForm.css";
@@ -29,24 +30,19 @@ export const createRegistrationForm = () => {
         };
 
         try {
-            const response = await fetch(REGISTER_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
 
-            if (!response.ok) {
+            const response = await makeRequest(REGISTER_URL, 'POST', formData)
+
+            if (!response) {
                 throw new Error("Error al registrar usuario");
             }
 
-            const data = await response.json();
+            const data = response;
 
             // Acá ya sería saltar al login, y rescatar la informacion.
             const mainContainer = document.querySelector("#main-container");
             mainContainer.innerHTML = "";
-            mainContainer.appendChild(createLoginForm(data.email));
+            mainContainer.appendChild(createLoginForm(data.userName));
         } catch (error) {
             console.error("Error al registrar usuario:", error.message);
             alert("Error al registrar usuario");

@@ -2,6 +2,7 @@ import "./events.css";
 import { EVENTS_URL } from '../../../utils/apiUrls.js';
 import { showEventCard } from "../showEventCard/showEventCard.js";
 import { searchEventsFiltersContainer } from "../searchEventsFiltersContainer/searchEventsFiltersContainer.js";
+import { makeRequest } from "../../../utils/api.js";
 
 export const showEvents = async () => {
     window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
@@ -10,12 +11,12 @@ export const showEvents = async () => {
         // Obtener la fecha actual en formato ISO (YYYY-MM-DD)
         const currentDate = new Date().toISOString().split('T')[0];
         // Realizar la solicitud GET enviando como parametro fromDate el valor de la fecha actual, formateado.
-        const response = await fetch(`${EVENTS_URL}?fromDate=${currentDate}`);
-        if (!response.ok) {
+        const response = await makeRequest(`${EVENTS_URL}?fromDate=${currentDate}`, 'GET');
+
+        if (!response) {
             throw new Error('Error al obtener los eventos');
         }
-        const eventsData = await response.json();
-        console.log(eventsData);
+        const eventsData = response
 
         // Convertir las fechas de cadena a objetos Date
         eventsData.forEach(event => {
@@ -51,8 +52,6 @@ export const showEvents = async () => {
         //  -----------------------------------     EVENTS CONTAINER MODIFIER     -------------------------------- //
 
         // Si a la vez que se visualiza el hero también hay un events container debajo, vamos a darle margen suficiente para que quepa
-        console.log(eventsContainer);
-
 
         var heroContainerPreviousHeight
         // Funcion de ajustarle el margin top al eventsContainer para que se ubique debajo del hero.

@@ -7,6 +7,7 @@ import { USERS_URL } from '../../../utils/apiUrls';
 import { showEvents } from '../../eventss/events/events';
 import { ShowEventList } from '../../eventss/showEventList/showEventList';
 import { createNewEventForm } from '../../eventss/createNewEventForm/createNewEventForm';
+import { makeRequest } from '../../../utils/api';
 
 export const createProfile = async () => {
     window.scrollTo({ top: 0}); // Asegurarnos de que el scroll esté arriba del todo en la pag
@@ -19,13 +20,11 @@ export const createProfile = async () => {
         mainContainer.appendChild(createLoginForm());
     } else {
         try {
-            const response = await fetch(`${USERS_URL}/${userId}`);
-
-            if (!response.ok) {
+            const response = await makeRequest(`${USERS_URL}/${userId}`, 'GET')
+            if (!response) {
                 throw new Error("Error al obtener la información del usuario");
             }
-
-            const userData = await response.json();
+            const userData = response;
 
             // Ordenar los eventos del usuario por fechas
             // Convertir las fechas de cadena a objetos Date
