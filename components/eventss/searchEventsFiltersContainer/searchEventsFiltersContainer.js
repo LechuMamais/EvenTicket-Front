@@ -2,9 +2,7 @@ import "./searchEventsFiltersContainer.css";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import "flatpickr/dist/themes/dark.css";
-import { EVENTS_URL } from '../../../utils/apiUrls.js';
-import { showEventCard } from "../showEventCard/showEventCard.js";
-import { makeRequest } from "../../../utils/api.js";
+import { getEventsList } from "../../../utils/events/getEventsList.js";
 
 export const searchEventsFiltersContainer = async () => {
 
@@ -55,23 +53,23 @@ export const searchEventsFiltersContainer = async () => {
         // Obtiene la posición actual de la página al hacer scroll
         const currentScrollPosition = window.pageYOffset;
         const eventCardContainer = document.querySelector('.events-card-container');
-        
+
         // Comprueba si el usuario está haciendo scroll hacia abajo
         if (currentScrollPosition > lastScrollPosition) {
             // Si está haciendo scroll hacia abajo, oculta el elemento #filter-by-date-container
             filterByDateContainer.classList.add('filter-hidden');
-            if(eventCardContainer){
-                console.log('Abajo: Hay event card container')
+            if (eventCardContainer) {
+                //console.log('Abajo: Hay event card container')
                 eventCardContainer.style.marginTop = '0px';
-                console.log(eventCardContainer.style.marginTop)
+                //console.log(eventCardContainer.style.marginTop)
             }
         } else {
             // Si está haciendo scroll hacia arriba, muestra el elemento #filter-by-date-container
             filterByDateContainer.classList.remove('filter-hidden');
-            if(eventCardContainer){
-                console.log('Arriba: Hay event card container')
+            if (eventCardContainer) {
+                //console.log('Arriba: Hay event card container')
                 eventCardContainer.style.marginTop = '76px';
-                console.log(eventCardContainer)
+                //console.log(eventCardContainer)
             }
         }
 
@@ -80,56 +78,21 @@ export const searchEventsFiltersContainer = async () => {
     });
 
     // Configurar Flatpickr para los inputs de fecha
-    flatpickr(fromDateInput, {
+    const dateOptions = {
         enableTime: false, // Deshabilitar selección de hora
         dateFormat: "Y-m-d", // Formato de fecha
         time_24hr: true, // Usar formato de 24 horas
         placeholder: "Desde" // Placeholder del input
-    });
-
-    flatpickr(toDateInput, {
-        enableTime: false,
-        dateFormat: "Y-m-d",
-        time_24hr: true,
-        placeholder: "Hasta"
-    });
+    };
+    flatpickr(fromDateInput, { dateOptions });
+    flatpickr(toDateInput, { dateOptions });
 
     // Manejar evento click del botón de búsqueda
     searchButton.addEventListener('click', async () => {
-        var fromDate = fromDateInput.value;
+        const fromDate = fromDateInput.value;
         const toDate = toDateInput.value;
-
-        try {
-            // Realizar la solicitud GET a la API con los filtros de fecha
-            if (fromDate === '') {
-                // Obtener la fecha actual en formato ISO (YYYY-MM-DD)
-                fromDate = new Date().toISOString().split('T')[0];
-            }
-            const response = await makeRequest(`${EVENTS_URL}?fromDate=${fromDate}&toDate=${toDate}`, 'GET');
-
-            if (!response) {
-                throw new Error('Error al obtener los eventos');
-            }
-            const eventsData = response
-
-            // Convertir las fechas de cadena a objetos Date para poder ordenarlos
-            eventsData.forEach(event => {
-                event.date = new Date(event.date);
-            });
-            // Ordenar los eventos por fecha
-            eventsData.sort((a, b) => a.date - b.date);
-
-            // Mostrar los eventos en el DOM
-            const eventsCardContainer = document.querySelector('.events-card-container');
-            eventsCardContainer.innerHTML = ''; // Limpiar contenido anterior
-
-            eventsData.forEach(event => {
-                const eventCard = showEventCard(event);
-                eventsCardContainer.appendChild(eventCard);
-            });
-        } catch (error) {
-            console.error('Error al obtener los eventos:', error.message);
-        }
+        const eventsCardContainer = document.querySelector('.events-card-container');
+        getEventsList({fromDate, toDate}, eventsCardContainer)
     });
 
     // Retornar el contenedor de filtros

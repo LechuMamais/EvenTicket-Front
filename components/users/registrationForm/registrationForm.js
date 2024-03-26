@@ -1,5 +1,7 @@
 import { makeRequest } from "../../../utils/api";
 import { REGISTER_URL } from "../../../utils/apiUrls";
+import { register } from "../../../utils/users/register";
+import { showNotification } from "../../global/showNotification/showNotification";
 import { createLoginForm } from "../loginForm/loginForm";
 import "./registrationForm.css";
 
@@ -16,6 +18,9 @@ export const createRegistrationForm = () => {
         
         <label for="password">Contraseña:</label><br>
         <input type="password" id="password" name="password"><br>
+
+        <label for="password">Repite la contraseña:</label><br>
+        <input type="password" id="password-repeat" name="password-repeat"><br>
         
         <button type="submit">Registrarse</button>
     `;
@@ -26,27 +31,11 @@ export const createRegistrationForm = () => {
         const formData = {
             userName: form.querySelector("#userName").value,
             email: form.querySelector("#email").value,
-            password: form.querySelector("#password").value
+            password: form.querySelector("#password").value,
+            passwordRepeat: form.querySelector("#password-repeat").value
         };
 
-        try {
-
-            const response = await makeRequest(REGISTER_URL, 'POST', formData)
-
-            if (!response) {
-                throw new Error("Error al registrar usuario");
-            }
-
-            const data = response;
-
-            // Acá ya sería saltar al login, y rescatar la informacion.
-            const mainContainer = document.querySelector("#main-container");
-            mainContainer.innerHTML = "";
-            mainContainer.appendChild(createLoginForm(data.userName));
-        } catch (error) {
-            console.error("Error al registrar usuario:", error.message);
-            alert("Error al registrar usuario");
-        }
+        register(formData);
     });
 
     const registrationFormContainer = document.createElement('div');

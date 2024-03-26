@@ -11,6 +11,10 @@ Mejoras hechas:
     - Component
     - Formulario
 
+- Si el usuario ya es asistente, boton de cancelar asistencia.
+
+- Si el usuario es el organizador, boton de modificar y cancelar evento
+
 - Organizar las urls en un fichero separado
 
 - Componente showEventCard(eventData)
@@ -41,14 +45,17 @@ Mejoras hechas:
 - Componente profile: mostrar un span "No hay eventos en tu lista" si la lista
     está vacía, tanto en la lista de as organizer como en la de as attendee
 
+- Terminar con los minibugs del listado de eventos
+
 - Filtros por fechas
 
+- api.js Funcion fetch componetizada
 
 --------------------------------------------------------------------------------
 
 Próximas mejoras:
 
-- Terminar con los minibugs del listado de eventos
+- Componetizar: Botones
 
 - Hacer un calendario de eventos a los que el usuario va como asistente.
 

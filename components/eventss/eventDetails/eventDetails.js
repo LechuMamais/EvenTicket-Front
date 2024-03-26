@@ -1,14 +1,18 @@
-import { ADD_ASSISTANCE_URL, EVENTS_URL, REMOVE_ASSISTANCE_URL, USERS_URL } from "../../../utils/apiUrls";
-import { showEvents } from "../events/events";
+import { EVENTS_URL } from "../../../utils/apiUrls";
 import { createLoginForm } from "../../users/loginForm/loginForm";
 import { createProfile } from "../../users/profile/profile";
 import { createRegistrationForm } from "../../users/registrationForm/registrationForm";
 import { updateEventForm } from "../updateEventForm/updateEventForm";
-import "./eventDetails.css";
 import { makeRequest } from "../../../utils/api";
+import { createButton } from "../../global/createButton/createButton";
+import { onClickHandler } from "../../../utils/onClickHandler";
+import { deleteEvent } from "../../../utils/events/deleteEvent";
+import { confirmAssistance } from "../../../utils/events/confirmAssistance";
+import { cancelAssistance } from "../../../utils/events/cancelAssistance";
+import "./eventDetails.css";
 
 export const showEventDetails = async (eventId) => {
-    window.scrollTo({ top: 0}); // Asegurarnos de que el scroll esté arriba del todo en la pag
+    window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
 
     try {
         // Obtener los detalles del evento desde la API
@@ -24,11 +28,6 @@ export const showEventDetails = async (eventId) => {
         const accessToken = localStorage.getItem("accessToken");
         const isAuthenticated = userId && accessToken;
 
-        //let userEventsAsAttendee = []; // Inicializar la lista de eventos a los que asistirá el usuario
-        let userEventsAsOrganizer = []; // Inicializar la lista de eventos a los que asistirá el usuario
-
-
-        
         // Especie de Hero del evento, con el elemento que contiene el titulo, y la imagen de fondo
         const imageElementContainer = document.createElement("div");
         imageElementContainer.classList.add('image-element-container');
@@ -36,18 +35,16 @@ export const showEventDetails = async (eventId) => {
         imageElementContainer.style.backgroundImage = backgroundImage;
 
         // Este Hero va a tener un efecto Parallax:
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrollTop = window.scrollY;
             const parallaxFactor = 0.5; // Factor de parallax 
-        
+
             // Calculamos la nueva posición vertical de la imagen
             const translateY = scrollTop * parallaxFactor;
-        
+
             // Y aplica la transformación CSS a la imagen
             imageElementContainer.style.transform = `translateY(${translateY}px)`;
         });
-
-        
 
         const titleElement = document.createElement('h2');
         titleElement.textContent = eventData.event.title;
@@ -55,6 +52,7 @@ export const showEventDetails = async (eventId) => {
 
         const mainContainer = document.querySelector('#main-container');
         mainContainer.appendChild(imageElementContainer);
+
         // Si el usuario no está autenticado, no le dejaremos ver los detalles del evento
         if (!isAuthenticated) {
             const authRequired = document.createElement('div');
@@ -64,26 +62,21 @@ export const showEventDetails = async (eventId) => {
             const authRequiredP = document.createElement('p');
             authRequiredP.textContent = '¿No estás registrado? Hazlo aqui';
             authRequiredH4.addEventListener('click', () => {
-                mainContainer.innerHTML = "";
-                mainContainer.appendChild(createLoginForm());
+                onClickHandler('#main-container', () => createLoginForm(''))
             })
             authRequiredP.addEventListener('click', () => {
-                mainContainer.innerHTML = "";
-                mainContainer.appendChild(createRegistrationForm());
+                onClickHandler('#main-container', () => createRegistrationForm(''))
             })
 
             authRequired.appendChild(authRequiredH4);
             authRequired.appendChild(authRequiredP);
 
-
-            console.log(mainContainer);
             mainContainer.innerHTML = "";
             mainContainer.appendChild(imageElementContainer);
             mainContainer.appendChild(authRequired);
 
         } else if (isAuthenticated) {
             // Si el usuario está autenticado, entonces que sí pueda ver los detalles del evento
-
 
             // Crear elementos HTML para mostrar los detalles del evento
             const eventDetailsContainer = document.createElement('div');
@@ -105,7 +98,7 @@ export const showEventDetails = async (eventId) => {
                 timeZone: 'UTC' // Puedes ajustar la zona horaria según sea necesario
             };
 
-            const formattedDateString  = new Intl.DateTimeFormat('es-ES', options).format(formattedDate);
+            const formattedDateString = new Intl.DateTimeFormat('es-ES', options).format(formattedDate);
             const dateElement = document.createElement('p');
             dateElement.textContent = `Fecha: ${formattedDateString}`;
 
@@ -144,7 +137,6 @@ export const showEventDetails = async (eventId) => {
                 attendeeListElement.innerHTML = `<h4>Aún no hay asistentes a este evento</h4>`;
                 attendeesList.appendChild(attendeeListElement)
             } else {
-
                 attendees.forEach((attendee) => {
                     const attendeeListElement = document.createElement('li');
                     const attendeeElement = document.createElement('p');
@@ -175,51 +167,23 @@ export const showEventDetails = async (eventId) => {
             mainContainer.appendChild(eventDetailsContainer);
 
             // Verificar si el usuario es organizdor del evento
+            const isOrganizer = eventData.event.createdBy === userId;
 
-            const isOrganizer = userEventsAsOrganizer.some(organizer => organizer._id === eventData.event._id);
             if (isAuthenticated && isOrganizer) {
                 // Si es organizador del evento, mostraremos un boton para actualizar el evento, y otro para eliminar el evento
 
-                // Boton que nos lleva a formulario para actualizar el evento
-                const updateButton = document.createElement("button");
-                updateButton.textContent = "Actualizar evento";
+                // Componente createButton que nos lleva a formulario para eliminar el evento, ya rellenado con los datos actuales del evento
+                const updateButton = createButton("Actualizar evento", () => {
+                    onClickHandler('.event-details-container', () => updateEventForm(event.target.dataset.eventId, eventData.event))
+                },
+                    { id: "update-event-button", class: "button-primary" });
                 updateButton.dataset.eventId = eventId; // Almacenar el eventId como un atributo de datos
-                updateButton.addEventListener("click", (event) => {
-                    const eventId = event.target.dataset.eventId; // Obtener el eventId del atributo de datos del botón
-                    mainContainer.innerHTML = '';
-                    mainContainer.appendChild(updateEventForm(eventId, eventData.event)); // Pasar el eventId al componente updateEventForm
-                });
                 eventDetailsContainer.appendChild(updateButton);
 
-                // Eliminar el evento
-                const deleteButton = document.createElement("button");
-                deleteButton.textContent = "Eliminar evento";
-                deleteButton.addEventListener("click", async () => {
-                    try {
-                        const response = await fetch(`${EVENTS_URL}/${eventId}`, {
-                            method: "DELETE",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${accessToken}`
-                            }
-                        });
-                        if (!response.ok) {
-                            throw new Error("Error al eliminar el evento");
-                        }
-                        const updatedEventsContainer = await showEvents();
-                        mainContainer.replaceWith(updatedEventsContainer);
-                        alert("Evento eliminado correctamente");
-                        window.location.reload();
-
-                    } catch (error) {
-                        console.error("Error al eliminar el evento:", error.message);
-                        alert("Error al eliminar el evento");
-
-                    }
-                });
-                eventDetailsContainer.appendChild(deleteButton);
+                // Llamamos al componente createButton y le pasamos la funcion que elimina evento, que importamos de utils
+                const deleteEventButton = createButton("Eliminar evento", async () => { deleteEvent(eventId) }, { id: "delete-event-button", class: "button-primary" });
+                eventDetailsContainer.appendChild(deleteEventButton);
             }
-
 
             // Si no es organizador, que pueda inscribirse al evento
             if (!isOrganizer) {
@@ -230,72 +194,21 @@ export const showEventDetails = async (eventId) => {
 
                 // Si no está inscripto en el evento, mostramos un boton para que pueda inscribirse
                 if (isAuthenticated && !isAttendee) {
-                    const attendButton = document.createElement("button");
-                    attendButton.textContent = "Asistir";
-                    attendButton.addEventListener("click", async () => {
-                        try {
-                            const response = await fetch(`${ADD_ASSISTANCE_URL}/${userId}/${eventId}`, {
-                                method: "PUT",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "Authorization": `Bearer ${accessToken}`
-                                },
-                            });
-
-                            if (!response.ok) {
-                                throw new Error("Error al asistir al evento");
-                            }
-
-                            alert("Te has inscripto al evento correctamente");
-                            // Recargar los detalles del evento después de asistir
-                            const updatedEventDetailsContainer = await showEvents();
-                            mainContainer.innerHTML = '';
-                            mainContainer.appendChild(updatedEventDetailsContainer);
-                        } catch (error) {
-                            console.error("Error al asistir al evento:", error.message);
-                            alert("Error al asistir al evento");
-                        }
-                    });
-                    eventDetailsContainer.appendChild(attendButton);
+                    // Llamamos al componente createButton y le pasamos la funcion que confirma asistencia a evento
+                    const confirmAssistanceButton = createButton("Asistir", async () => { confirmAssistance(userId, eventId) }, { id: "confirm-assistance-button", class: "button-primary" });
+                    eventDetailsContainer.appendChild(confirmAssistanceButton);
 
                 } else if (isAuthenticated && isAttendee) {
-
-                    // Si ya está inscripto en el evento, lo indicamos en un span.
+                    // Si ya está inscripto en el evento, lo indicamos en un span y mostramos un boton para que pueda inscribirse
                     const alreadyAttendeeSpan = document.createElement("span");
                     alreadyAttendeeSpan.textContent = "Ya eres asistente!";
                     eventDetailsContainer.appendChild(alreadyAttendeeSpan);
 
-                    // Y además mostraremos un boton, que al darle click cancele la asistencia al evento
-                    const cancelAttendButton = document.createElement("button");
-                    cancelAttendButton.textContent = "Cancelar Asistencia";
-                    cancelAttendButton.addEventListener("click", async () => {
-                        try {
-                            const response = await fetch(`${REMOVE_ASSISTANCE_URL}/${userId}/${eventId}`, {
-                                method: "PUT",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "Authorization": `Bearer ${accessToken}`
-                                },
-                            });
-
-                            if (!response.ok) {
-                                throw new Error("Error al cancelar asistencia al evento");
-                            }
-
-                            alert("Has cancelado correctamente");
-                            // Recargar la lista de eventos después de asistir
-                            const updatedEventsContainer = await showEvents();
-                            mainContainer.innerHTML = '';
-                            mainContainer.appendChild(updatedEventsContainer);
-                        } catch (error) {
-                            console.error("Error al cancelar asistencia al evento:", error.message);
-                            alert("Error al cancelar asistencia al evento");
-                        }
-                    });
+                    // Llamamos al componente createButton y le pasamos la funcion que cancela asistencia a evento que importamos de utils/events
+                    const cancelAttendButton = createButton("Cancelar Asistencia", async () => { cancelAssistance(userId, eventId) }, { id: "cancel-assistance-button", class: "button-primary" });
                     eventDetailsContainer.appendChild(cancelAttendButton);
                 }
             }
-
         }
         return mainContainer;
 

@@ -20,16 +20,18 @@
     background-color: var(--color-medium);
 }
 
-/*
+.notification-delete {
+    background-color: #d8858e;
+}
+.notification-error {
+    background-color: #dc3545;
+}
+
 .notification-success {
     background-color: #28a745;
 }
-
+/*
 .notification-warning {
     background-color: #ffc107;
-}
-
-.notification-error {
-    background-color: #dc3545;
 }
 */

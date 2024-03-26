@@ -36,6 +36,7 @@
     font-size: 0.7rem !important;
     background-color: transparent !important;
     border: none;
+    color: black !important;
 }
 #submit-button{
     margin-top: 1rem;
