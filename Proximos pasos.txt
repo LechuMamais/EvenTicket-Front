@@ -75,3 +75,20 @@ Mejoras Futuras:
 - Cloudinary: subida de ficheros de imagenes a la nube.
 
 - Integración con API de envío de correo electrónico.
+
+
+
+
+
+            const updateProfileButton = createButton("Actualizar perfil", () => {
+                onClickHandler('#main-container', () => updateProfileForm(userData))
+            },
+                { id: "update-profile-button", class: "button-primary" });
+            userEventsAsOrganizerContainer.appendChild(updateProfileButton);
+
+            const logOutButton = createButton("logOut", () => {
+                localStorage.clear();
+                window.location.reload();
+            },
+                { id: "logOut-button", class: "button-primary" });
+            userEventsAsOrganizerContainer.appendChild(logOutButton);

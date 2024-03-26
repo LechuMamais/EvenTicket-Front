@@ -3,15 +3,16 @@ import './profile.css'
 import { updateProfileForm } from "../updateProfileForm/updateProfileForm";
 import { showEventDetails } from "../../eventss/eventDetails/eventDetails";
 import { createLoginForm } from '../loginForm/loginForm';
-import { USERS_URL } from '../../../utils/apiUrls';
 import { showEvents } from '../../eventss/events/events';
 import { ShowEventList } from '../../eventss/showEventList/showEventList';
 import { createNewEventForm } from '../../eventss/createNewEventForm/createNewEventForm';
-import { makeRequest } from '../../../utils/api';
+import { onClickHandler } from '../../../utils/onClickHandler';
+import { createButton } from '../../global/createButton/createButton';
+import { showNotification } from '../../global/showNotification/showNotification';
+import { getUserData } from '../../../utils/users/getUserData';
 
 export const createProfile = async () => {
     window.scrollTo({ top: 0}); // Asegurarnos de que el scroll esté arriba del todo en la pag
-
     const userId = localStorage.getItem("userId");
 
     if (userId == null) {
@@ -20,28 +21,7 @@ export const createProfile = async () => {
         mainContainer.appendChild(createLoginForm());
     } else {
         try {
-            const response = await makeRequest(`${USERS_URL}/${userId}`, 'GET')
-            if (!response) {
-                throw new Error("Error al obtener la información del usuario");
-            }
-            const userData = response;
-
-            // Ordenar los eventos del usuario por fechas
-            // Convertir las fechas de cadena a objetos Date
-            userData.eventsAsOrganizer.forEach(event => {
-                event.date = new Date(event.date);
-            });
-
-            // Ordenar los eventos por fecha
-            userData.eventsAsOrganizer.sort((a, b) => a.date - b.date);
-
-            // Convertir las fechas de cadena a objetos Date
-            userData.eventsAsAttendee.forEach(event => {
-                event.date = new Date(event.date);
-            });
-
-            // Ordenar los eventos por fecha
-            userData.eventsAsAttendee.sort((a, b) => a.date - b.date);
+            const userData = getUserData(userId);
 
             const profileContainer = document.createElement("div");
             profileContainer.id = "profile-container";
@@ -69,41 +49,18 @@ export const createProfile = async () => {
             </div>
             `;
 
+            const showEventsButton = createButton("Ver eventos disponibles", () => {
+                onClickHandler('#main-container', () => showEvents())
+            }, { id: "show-events-button", class: "button-primary" });
 
-            const createNewEventButton = document.createElement("button");
-            createNewEventButton.textContent = "Crear Nuevo Evento";
-            createNewEventButton.addEventListener("click", () => {
-                const mainContainer = document.querySelector('#main-container');
-                mainContainer.innerHTML = "";
-                mainContainer.appendChild(createNewEventForm());
-            });
+            const updateProfileButton = createButton("Actualizar perfil", () => {
+                onClickHandler('#main-container', () => updateProfileForm(userData))
+            }, { id: "update-profile-button", class: "button-primary" });
 
-            const showEventsButton = document.createElement("button");
-            showEventsButton.textContent = "Ver eventos disponibles";
-            showEventsButton.addEventListener("click", async () => {
-                const mainContainer = document.querySelector("#main-container");
-                mainContainer.innerHTML = "";
-                const eventsComponent = await showEvents();
-                if (eventsComponent) {
-                    mainContainer.appendChild(eventsComponent);
-                }
-            });
-
-            const updateProfileButton = document.createElement("button");
-            updateProfileButton.textContent = "Actualizar perfil";
-            updateProfileButton.addEventListener("click", () => {
-                const mainContainer = document.querySelector('#main-container');
-                mainContainer.innerHTML = "";
-                mainContainer.appendChild(updateProfileForm(userData));
-            });
-
-            const logOutButton = document.createElement("button");
-            logOutButton.textContent = "logOut";
-            logOutButton.id = "logOut-button";
-            logOutButton.addEventListener("click", () => {
+            const logOutButton = createButton("logOut", () => {
                 localStorage.clear();
                 window.location.reload();
-            });
+            }, { id: "logOut-button", class: "button-primary" });
 
             const mainContainer = document.querySelector('#main-container');
             mainContainer.innerHTML = "";
@@ -116,7 +73,6 @@ export const createProfile = async () => {
             userOptionsContainer.appendChild(logOutButton);
             userInfoContainer.appendChild(userOptionsContainer);
 
-
             const userEventsAsOrganizerContainer = document.querySelector('#user-events-as-organizer-container');
             // Si la lista está vacia indicarlo en un texto
             if (userData.eventsAsOrganizer.length === 0) {
@@ -126,6 +82,11 @@ export const createProfile = async () => {
                 noEventsAsOrganizer.textContent = 'No estás organizando ningún evento.';
                 userEventsAsOrganizerContainer.appendChild(noEventsAsOrganizer);
             }
+
+            const createNewEventButton = createButton("Crear Nuevo evento", () => {
+                onClickHandler('#main-container', () => createNewEventForm())
+            }, { id: "create-new-event-button", class: "button-primary" });          
+
             userEventsAsOrganizerContainer.appendChild(createNewEventButton);
 
             const userEventsAsAssistantContainer = document.querySelector('#user-events-as-assistant-container');
@@ -151,7 +112,7 @@ export const createProfile = async () => {
 
         } catch (error) {
             console.error("Error al obtener la información del usuario:", error.message);
-            alert("Error al obtener la información del usuario");
+            showNotification("Error al mostrar el perfil del usuario", "error");
         }
     }
 };

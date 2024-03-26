@@ -2,6 +2,7 @@ import { updateProfile } from '../../../utils/users/updateProfile';
 import './updateProfileForm.css'
 
 export const updateProfileForm = (userData) => {
+    window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     // Obtener el userId y el accessToken guardados en localStorage
     const userId = localStorage.getItem("userId");
     const accessToken = localStorage.getItem("accessToken");

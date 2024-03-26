@@ -26,6 +26,7 @@ src/
 |   |-- |-- showEventList                    # Componente de lista de tarjetas de eventos
 |   |-- |-- updateEventForm                  # Componente de actualizar datos de un evento
 |   |-- global/                              # Componentes globales
+|   |-- |-- createButton                     # Componente que muestra un nuevo boton. 
 |   |-- |-- footer                           # Componente que muestra el footer de la aplicación
 |   |-- |-- header                           # Componente del encabezado
 |   |-- |-- heroContent                      # Componente del hero de la aplicación
@@ -45,6 +46,7 @@ src/
 |   |-- |-- getEventsList                    # Funcion para obtener un listado de eventos. Puede recibir fechas como un objeto para filtrar resultados
 |   |-- |-- updateEvent                      # Funcion para actualizar la información de un evento
 |   |-- users/                               # Utilidades y funciones relacionados a la gestion de usuarios
+|   |-- |-- getUserData                      # Funcion para obtener toda la información del usuario
 |   |-- |-- login                            # Funcion para loguear un usuario
 |   |-- |-- register                         # Funcion para registrar un nuevo usuario
 |   |-- |-- updateProfile                    # Funcion para actualizar los datos de un usuario
@@ -120,6 +122,8 @@ createEventForm
 showNotification
     Muestra una notificación. Recibe como parámetros el texto de la aplicación, y un parámetro que será la class a la que se le aplicarán estilos css
 
+createButton
+    Componente button. Recibe el textContent, la función que dispara el click y un objeto cuyas propiedades se incluiran como atributos html
 
 Configuración y Uso
 
