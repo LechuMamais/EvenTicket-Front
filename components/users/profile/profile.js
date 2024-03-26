@@ -21,7 +21,7 @@ export const createProfile = async () => {
         mainContainer.appendChild(createLoginForm());
     } else {
         try {
-            const userData = getUserData(userId);
+            const userData = await getUserData(userId);
 
             const profileContainer = document.createElement("div");
             profileContainer.id = "profile-container";
