@@ -51,17 +51,21 @@ Mejoras hechas:
 
 - api.js Funcion fetch componetizada
 
+- Componetizar: Botones
+
 --------------------------------------------------------------------------------
 
 Próximas mejoras:
 
-- Componetizar: Botones
-
 - Hacer un calendario de eventos a los que el usuario va como asistente.
 
-- Cuentas de usuarios, cuentas de organizadores, cuentas de administradores.
+- Perfil de usuario: Separar eventos futuros de eventos a los que ya ha asistido (pasados)
 
-- Filtros de busqueda: busqueda por palabras
+- Filtros de busqueda: 
+    - busqueda por palabras
+    - busqueda por ciudades
+
+- Cuentas de usuarios, cuentas de organizadores, cuentas de administradores.
 
 
 --------------------------------------------------------------------------------

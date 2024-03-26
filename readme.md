@@ -16,27 +16,41 @@ lua
 
 src/
 |-- components/                              # Componentes reutilizables
-|   |-- eventss                              # Componentes relacionados a la gestion de eventos
+|   |-- eventss/                             # Componentes relacionados a la gestion de eventos
 |   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
 |   |-- |-- eventDetails.js                  # Componente del detalles de un evento
+|   |-- |-- eventForm                        # Componente que muestra un formulario para crear o actualizar la informacion de un evento
 |   |-- |-- events                           # Componente que muestra la lista de eventos y filtros de busqueda
 |   |-- |-- searchEventsFiltersContainer     # Componente de filtros de busqueda
 |   |-- |-- showEventCard                    # Componente de tarjeta de evento
 |   |-- |-- showEventList                    # Componente de lista de tarjetas de eventos
 |   |-- |-- updateEventForm                  # Componente de actualizar datos de un evento
-|   |-- global                               # Componentes globales
+|   |-- global/                              # Componentes globales
 |   |-- |-- footer                           # Componente que muestra el footer de la aplicación
 |   |-- |-- header                           # Componente del encabezado
 |   |-- |-- heroContent                      # Componente del hero de la aplicación
 |   |-- |-- home                             # Componente del home de la aplicación
 |   |-- |-- mainContainer                    # Componente de contanedor principal de la aplicación
-|   |-- users                                # Componentes relacionados a la gestion de usuarios
+|   |-- users/                               # Componentes relacionados a la gestion de usuarios
 |   |-- |-- loginForm                        # Componente de formulario de login
 |   |-- |-- profile                          # Componente de perfil de usuario
 |   |-- |-- registrationForm                 # Componente de formulario de registro
 |   |-- |-- updateProfileForm                # Componente de actualizar datos de un usuario
 |-- utils/                                   # Utilidades y funciones auxiliares
+|   |-- eventss/                             # Utilidades y funciones relacionados a la gestion de eventos
+|   |-- |-- cancelAssistance                 # Funcion para cancelar asistencia a evento
+|   |-- |-- confirmAssistance                # Funcion para confirmar asistencia a evento
+|   |-- |-- createNewEvent                   # Funcion para crear nuevo evento
+|   |-- |-- deleteEvent                      # Funcion para borrar un evento
+|   |-- |-- getEventsList                    # Funcion para obtener un listado de eventos. Puede recibir fechas como un objeto para filtrar resultados
+|   |-- |-- updateEvent                      # Funcion para actualizar la información de un evento
+|   |-- users/                               # Utilidades y funciones relacionados a la gestion de usuarios
+|   |-- |-- login                            # Funcion para loguear un usuario
+|   |-- |-- register                         # Funcion para registrar un nuevo usuario
+|   |-- |-- updateProfile                    # Funcion para actualizar los datos de un usuario
+|   |-- api.js                               # Funcion para hacer peticiones a la API
 |   |-- apiUrls.js                           # Aquí se almacenan las urls donde se harán las peticiones
+|   |-- onClickHandler.js                    # Función para manejar eventos de clic comunes, donde se quita un componente y se muestra otro
 |-- App.js                                   # Componente principal de la aplicación
 |-- index.js                                 # Punto de entrada de la aplicación
 
@@ -99,6 +113,9 @@ showEventDetails
 
 createNewEventForm
     Muestra un formulario para crear un nuevo evento.
+
+createEventForm
+    Es el formulario que se muestra en createNewEventForm y updateEventForm. Recibe como parámetros el id del formulario y el texto del boton submit
 
 showNotification
     Muestra una notificación. Recibe como parámetros el texto de la aplicación, y un parámetro que será la class a la que se le aplicarán estilos css
