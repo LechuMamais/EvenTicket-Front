@@ -1,5 +1,6 @@
 import flatpickr from "flatpickr";
 import './eventForm.css'
+import { flatpickrConfig } from "../../../utils/flatpickrConfig";
 
 export const createEventForm = (formId, submitText) =>{
     const form = document.createElement("form");
@@ -28,10 +29,6 @@ export const createEventForm = (formId, submitText) =>{
     // Vamos a utilizar Flatpickr para el campo de fecha y hora.
     // De esta manera estandarizamos el formato en el que se envía el datetime al servidor.
     // El formato que vamos a utilizar es el de mongoDB, que es el formato de fecha y hora de JavaScript (ISODate)
-    flatpickr(form.querySelector("#date"), {
-        enableTime: true, // Habilita la selección de hora
-        dateFormat: "Y-m-d H:i", // Formato de fecha y hora
-        time_24hr: true // Usa formato de 24 horas
-    });
+    flatpickr(form.querySelector("#date"), flatpickrConfig);
     return form;
 }

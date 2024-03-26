@@ -3,6 +3,7 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import "flatpickr/dist/themes/dark.css";
 import { getEventsList } from "../../../utils/events/getEventsList.js";
+import { flatpickrConfig } from "../../../utils/flatpickrConfig.js";
 
 export const searchEventsFiltersContainer = async () => {
 
@@ -77,15 +78,8 @@ export const searchEventsFiltersContainer = async () => {
         lastScrollPosition = currentScrollPosition;
     });
 
-    // Configurar Flatpickr para los inputs de fecha
-    const dateOptions = {
-        enableTime: false, // Deshabilitar selección de hora
-        dateFormat: "Y-m-d", // Formato de fecha
-        time_24hr: true, // Usar formato de 24 horas
-        placeholder: "Desde" // Placeholder del input
-    };
-    flatpickr(fromDateInput, { dateOptions });
-    flatpickr(toDateInput, { dateOptions });
+    flatpickr(fromDateInput, flatpickrConfig );
+    flatpickr(toDateInput, flatpickrConfig );
 
     // Manejar evento click del botón de búsqueda
     searchButton.addEventListener('click', async () => {

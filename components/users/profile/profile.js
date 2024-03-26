@@ -12,7 +12,7 @@ import { showNotification } from '../../global/showNotification/showNotification
 import { getUserData } from '../../../utils/users/getUserData';
 
 export const createProfile = async () => {
-    window.scrollTo({ top: 0}); // Asegurarnos de que el scroll esté arriba del todo en la pag
+    window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     const userId = localStorage.getItem("userId");
 
     if (userId == null) {
@@ -26,7 +26,6 @@ export const createProfile = async () => {
             const profileContainer = document.createElement("div");
             profileContainer.id = "profile-container";
             profileContainer.innerHTML = `
-            
             <div id="user-events-container">
                 <div id="user-events-as-organizer-container">
                     <h2 id="text-events-as-organizer">Eventos que estás organizando:</h2>
@@ -73,6 +72,8 @@ export const createProfile = async () => {
             userOptionsContainer.appendChild(logOutButton);
             userInfoContainer.appendChild(userOptionsContainer);
 
+            // -------------------------------- EVENTOS COMO ORGANIZADOR --------------------------------
+
             const userEventsAsOrganizerContainer = document.querySelector('#user-events-as-organizer-container');
             // Si la lista está vacia indicarlo en un texto
             if (userData.eventsAsOrganizer.length === 0) {
@@ -85,10 +86,11 @@ export const createProfile = async () => {
 
             const createNewEventButton = createButton("Crear Nuevo evento", () => {
                 onClickHandler('#main-container', () => createNewEventForm())
-            }, { id: "create-new-event-button", class: "button-primary" });          
+            }, { id: "create-new-event-button", class: "button-primary" });
 
             userEventsAsOrganizerContainer.appendChild(createNewEventButton);
 
+            // -------------------------------- EVENTOS COMO ASISTENTE --------------------------------
             const userEventsAsAssistantContainer = document.querySelector('#user-events-as-assistant-container');
             // Si la lista está vacia indicarlo en un texto
             if (userData.eventsAsAttendee.length === 0) {
@@ -100,6 +102,7 @@ export const createProfile = async () => {
             }
             userEventsAsAssistantContainer.appendChild(showEventsButton);
 
+            // Que cada eventCard, al darle click, lleve a su eventDetails component 
             const eventButtons = document.querySelectorAll(".event-card");
             eventButtons.forEach(button => {
                 button.addEventListener("click", () => {

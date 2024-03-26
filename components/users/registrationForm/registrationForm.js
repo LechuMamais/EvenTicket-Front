@@ -1,8 +1,5 @@
-import { makeRequest } from "../../../utils/api";
-import { REGISTER_URL } from "../../../utils/apiUrls";
 import { register } from "../../../utils/users/register";
-import { showNotification } from "../../global/showNotification/showNotification";
-import { createLoginForm } from "../loginForm/loginForm";
+
 import "./registrationForm.css";
 
 export const createRegistrationForm = () => {

@@ -50,8 +50,6 @@ export function heroContainer() {
 
     // Agregar efecto de ajuste de tamaño al hacer scroll
     window.addEventListener('scroll', adjustTitleSize);
-
-
-
+    
     return heroContainer;
 }
