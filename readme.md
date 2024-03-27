@@ -14,47 +14,48 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
 
 
 src/
-|-- components/                              # Componentes reutilizables
-|   |-- eventss/                             # Componentes relacionados a la gestion de eventos
-|   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
-|   |-- |-- eventDetails.js                  # Componente del detalles de un evento
-|   |-- |-- eventForm                        # Componente que muestra un formulario para crear o actualizar la informacion de un evento
-|   |-- |-- events                           # Componente que muestra la lista de eventos y filtros de busqueda
-|   |-- |-- searchEventsFiltersContainer     # Componente de filtros de busqueda
-|   |-- |-- showEventCard                    # Componente de tarjeta de evento
-|   |-- |-- showEventList                    # Componente de lista de tarjetas de eventos
-|   |-- |-- updateEventForm                  # Componente de actualizar datos de un evento
-|   |-- global/                              # Componentes globales
-|   |-- |-- createButton                     # Componente que muestra un nuevo boton. 
-|   |-- |-- footer                           # Componente que muestra el footer de la aplicación
-|   |-- |-- header                           # Componente del encabezado
-|   |-- |-- heroContent                      # Componente del hero de la aplicación
-|   |-- |-- home                             # Componente del home de la aplicación
-|   |-- |-- mainContainer                    # Componente de contanedor principal de la aplicación
-|   |-- users/                               # Componentes relacionados a la gestion de usuarios
-|   |-- |-- loginForm                        # Componente de formulario de login
-|   |-- |-- profile                          # Componente de perfil de usuario
-|   |-- |-- registrationForm                 # Componente de formulario de registro
-|   |-- |-- updateProfileForm                # Componente de actualizar datos de un usuario
-|-- utils/                                   # Utilidades y funciones auxiliares
-|   |-- eventss/                             # Utilidades y funciones relacionados a la gestion de eventos
-|   |-- |-- cancelAssistance                 # Funcion para cancelar asistencia a evento
-|   |-- |-- confirmAssistance                # Funcion para confirmar asistencia a evento
-|   |-- |-- createNewEvent                   # Funcion para crear nuevo evento
-|   |-- |-- deleteEvent                      # Funcion para borrar un evento
-|   |-- |-- getEventsList                    # Funcion para obtener un listado de eventos. Puede recibir fechas como un objeto para filtrar resultados
-|   |-- |-- updateEvent                      # Funcion para actualizar la información de un evento
-|   |-- users/                               # Utilidades y funciones relacionados a la gestion de usuarios
-|   |-- |-- getUserData                      # Funcion para obtener toda la información del usuario
-|   |-- |-- login                            # Funcion para loguear un usuario
-|   |-- |-- register                         # Funcion para registrar un nuevo usuario
-|   |-- |-- updateProfile                    # Funcion para actualizar los datos de un usuario
-|   |-- api.js                               # Funcion para hacer peticiones a la API
-|   |-- apiUrls.js                           # Aquí se almacenan las urls donde se harán las peticiones
-|   |-- flatpickrConfig.js                   # Aquí se almacenan un objeto con las configuraciones de flatpickr,. libreria para manejar la seleccion de fechas
-|   |-- onClickHandler.js                    # Función para manejar eventos de clic comunes, donde se quita un componente y se muestra otro
-|-- App.js                                   # Componente principal de la aplicación
-|-- index.js                                 # Punto de entrada de la aplicación
+|-- components/                               # Componentes reutilizables
+|   |-- eventss/                              # Componentes relacionados a la gestión de eventos
+|   |   |-- createNewEventForm.js             # Componente de formulario para crear nuevo evento
+|   |   |-- eventDetails.js                   # Componente para mostrar los detalles de un evento
+|   |   |-- eventForm.js                      # Componente que muestra un formulario para crear o actualizar información de un evento
+|   |   |-- events/                           # Componente que muestra la lista de eventos y filtros de búsqueda
+|   |   |   |-- searchEventsFiltersContainer.js # Componente de filtros de búsqueda
+|   |   |   |-- showEventCard.js              # Componente de tarjeta de evento
+|   |   |   |-- showEventList.js              # Componente de lista de tarjetas de eventos
+|   |   |   |-- updateEventForm.js            # Componente para actualizar datos de un evento
+|   |-- global/                               # Componentes globales
+|   |   |-- createButton.js                   # Componente para mostrar un nuevo botón
+|   |   |-- footer.js                         # Componente que muestra el pie de página de la aplicación
+|   |   |-- header.js                         # Componente del encabezado
+|   |   |-- heroContent.js                    # Componente del héroe de la aplicación
+|   |   |-- home.js                           # Componente de la página principal de la aplicación
+|   |   |-- mainContainer.js                  # Componente del contenedor principal de la aplicación
+|   |-- users/                                # Componentes relacionados a la gestión de usuarios
+|   |   |-- loginForm.js                      # Componente de formulario de inicio de sesión
+|   |   |-- profile.js                        # Componente de perfil de usuario
+|   |   |-- registrationForm.js               # Componente de formulario de registro
+|   |   |-- updateProfileForm.js              # Componente para actualizar datos de un usuario
+|-- utils/                                    # Utilidades y funciones auxiliares
+|   |-- eventss/                              # Utilidades y funciones relacionados a la gestión de eventos
+|   |   |-- cancelAssistance.js               # Función para cancelar asistencia a un evento
+|   |   |-- confirmAssistance.js              # Función para confirmar asistencia a un evento
+|   |   |-- createNewEvent.js                 # Función para crear un nuevo evento
+|   |   |-- deleteEvent.js                    # Función para borrar un evento
+|   |   |-- getEventsList.js                  # Función para obtener un listado de eventos, puede recibir fechas como un objeto para filtrar resultados
+|   |   |-- updateEvent.js                    # Función para actualizar la información de un evento
+|   |-- users/                                # Utilidades y funciones relacionados a la gestión de usuarios
+|   |   |-- getUserData.js                    # Función para obtener toda la información del usuario
+|   |   |-- login.js                          # Función para iniciar sesión de un usuario
+|   |   |-- register.js                       # Función para registrar un nuevo usuario
+|   |   |-- updateProfile.js                  # Función para actualizar los datos de un usuario
+|   |-- api.js                                # Función para hacer peticiones a la API
+|   |-- apiUrls.js                            # Aquí se almacenan las URLs donde se harán las peticiones
+|   |-- flatpickrConfig.js                    # Aquí se almacenan las configuraciones de Flatpickr, una librería para manejar la selección de fechas
+|   |-- onClickHandler.js                     # Función para manejar eventos de clic comunes, donde se quita un componente y se muestra otro
+|-- App.js                                    # Componente principal de la aplicación
+|-- index.js                                  # Punto de entrada de la aplicación
+
 
 Funcionalidades Principales
 
