@@ -13,48 +13,48 @@ Arquitectura y Estructura
 El frontend sigue una arquitectura de aplicación de una sola página (SPA) utilizando javascript vainilla. La aplicación está estructurada de la siguiente manera:
 
 
-src/
-|-- components/                              # Componentes reutilizables
-|   |-- eventss/                             # Componentes relacionados a la gestion de eventos
-|   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
-|   |-- |-- eventDetails.js                  # Componente del detalles de un evento
-|   |-- |-- eventForm                        # Componente que muestra un formulario para crear o actualizar la informacion de un evento
-|   |-- |-- events                           # Componente que muestra la lista de eventos y filtros de busqueda
-|   |-- |-- searchEventsFiltersContainer     # Componente de filtros de busqueda
-|   |-- |-- showEventCard                    # Componente de tarjeta de evento
-|   |-- |-- showEventList                    # Componente de lista de tarjetas de eventos
-|   |-- |-- updateEventForm                  # Componente de actualizar datos de un evento
-|   |-- global/                              # Componentes globales
-|   |-- |-- createButton                     # Componente que muestra un nuevo boton. 
-|   |-- |-- footer                           # Componente que muestra el footer de la aplicación
-|   |-- |-- header                           # Componente del encabezado
-|   |-- |-- heroContent                      # Componente del hero de la aplicación
-|   |-- |-- home                             # Componente del home de la aplicación
-|   |-- |-- mainContainer                    # Componente de contanedor principal de la aplicación
-|   |-- users/                               # Componentes relacionados a la gestion de usuarios
-|   |-- |-- loginForm                        # Componente de formulario de login
-|   |-- |-- profile                          # Componente de perfil de usuario
-|   |-- |-- registrationForm                 # Componente de formulario de registro
-|   |-- |-- updateProfileForm                # Componente de actualizar datos de un usuario
-|-- utils/                                   # Utilidades y funciones auxiliares
-|   |-- eventss/                             # Utilidades y funciones relacionados a la gestion de eventos
-|   |-- |-- cancelAssistance                 # Funcion para cancelar asistencia a evento
-|   |-- |-- confirmAssistance                # Funcion para confirmar asistencia a evento
-|   |-- |-- createNewEvent                   # Funcion para crear nuevo evento
-|   |-- |-- deleteEvent                      # Funcion para borrar un evento
-|   |-- |-- getEventsList                    # Funcion para obtener un listado de eventos. Puede recibir fechas como un objeto para filtrar resultados
-|   |-- |-- updateEvent                      # Funcion para actualizar la información de un evento
-|   |-- users/                               # Utilidades y funciones relacionados a la gestion de usuarios
-|   |-- |-- getUserData                      # Funcion para obtener toda la información del usuario
-|   |-- |-- login                            # Funcion para loguear un usuario
-|   |-- |-- register                         # Funcion para registrar un nuevo usuario
-|   |-- |-- updateProfile                    # Funcion para actualizar los datos de un usuario
-|   |-- api.js                               # Funcion para hacer peticiones a la API
-|   |-- apiUrls.js                           # Aquí se almacenan las urls donde se harán las peticiones
-|   |-- flatpickrConfig.js                   # Aquí se almacenan un objeto con las configuraciones de flatpickr,. libreria para manejar la seleccion de fechas
-|   |-- onClickHandler.js                    # Función para manejar eventos de clic comunes, donde se quita un componente y se muestra otro
-|-- App.js                                   # Componente principal de la aplicación
-|-- index.js                                 # Punto de entrada de la aplicación
+    src/
+    |-- components/                              # Componentes reutilizables
+    |   |-- eventss/                             # Componentes relacionados a la gestion de eventos
+    |   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
+    |   |-- |-- eventDetails.js                  # Componente del detalles de un evento
+    |   |-- |-- eventForm                        # Componente que muestra un formulario para crear o actualizar la informacion de un evento
+    |   |-- |-- events                           # Componente que muestra la lista de eventos y filtros de busqueda
+    |   |-- |-- searchEventsFiltersContainer     # Componente de filtros de busqueda
+    |   |-- |-- showEventCard                    # Componente de tarjeta de evento
+    |   |-- |-- showEventList                    # Componente de lista de tarjetas de eventos
+    |   |-- |-- updateEventForm                  # Componente de actualizar datos de un evento
+    |   |-- global/                              # Componentes globales
+    |   |-- |-- createButton                     # Componente que muestra un nuevo boton. 
+    |   |-- |-- footer                           # Componente que muestra el footer de la aplicación
+    |   |-- |-- header                           # Componente del encabezado
+    |   |-- |-- heroContent                      # Componente del hero de la aplicación
+    |   |-- |-- home                             # Componente del home de la aplicación
+    |   |-- |-- mainContainer                    # Componente de contanedor principal de la aplicación
+    |   |-- users/                               # Componentes relacionados a la gestion de usuarios
+    |   |-- |-- loginForm                        # Componente de formulario de login
+    |   |-- |-- profile                          # Componente de perfil de usuario
+    |   |-- |-- registrationForm                 # Componente de formulario de registro
+    |   |-- |-- updateProfileForm                # Componente de actualizar datos de un usuario
+    |-- utils/                                   # Utilidades y funciones auxiliares
+    |   |-- eventss/                             # Utilidades y funciones relacionados a la gestion de eventos
+    |   |-- |-- cancelAssistance                 # Funcion para cancelar asistencia a evento
+    |   |-- |-- confirmAssistance                # Funcion para confirmar asistencia a evento
+    |   |-- |-- createNewEvent                   # Funcion para crear nuevo evento
+    |   |-- |-- deleteEvent                      # Funcion para borrar un evento
+    |   |-- |-- getEventsList                    # Funcion para obtener un listado de eventos. Puede recibir fechas como un objeto para filtrar resultados
+    |   |-- |-- updateEvent                      # Funcion para actualizar la información de un evento
+    |   |-- users/                               # Utilidades y funciones relacionados a la gestion de usuarios
+    |   |-- |-- getUserData                      # Funcion para obtener toda la información del usuario
+    |   |-- |-- login                            # Funcion para loguear un usuario
+    |   |-- |-- register                         # Funcion para registrar un nuevo usuario
+    |   |-- |-- updateProfile                    # Funcion para actualizar los datos de un usuario
+    |   |-- api.js                               # Funcion para hacer peticiones a la API
+    |   |-- apiUrls.js                           # Aquí se almacenan las urls donde se harán las peticiones
+    |   |-- flatpickrConfig.js                   # Aquí se almacenan un objeto con las configuraciones de flatpickr,. libreria para manejar la seleccion de fechas
+    |   |-- onClickHandler.js                    # Función para manejar eventos de clic comunes, donde se quita un componente y se muestra otro
+    |-- App.js                                   # Componente principal de la aplicación
+    |-- index.js                                 # Punto de entrada de la aplicación
 
 
 Funcionalidades Principales
