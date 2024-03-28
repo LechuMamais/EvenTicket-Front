@@ -7,13 +7,16 @@ Tecnologías Utilizadas
     HTML5
     CSS3
     JavaScript (ES6+)
+    Node.js
+    Vite.js
+    flatpickr
+    moment.js
 
 Arquitectura y Estructura
 
 El frontend sigue una arquitectura de aplicación de una sola página (SPA) utilizando javascript vainilla. La aplicación está estructurada de la siguiente manera:
 
 
-    
     |-- components/                              # Componentes reutilizables
     |   |-- eventss/                             # Componentes relacionados a la gestion de eventos
     |   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
@@ -51,7 +54,7 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
     |   |-- |-- updateProfile                    # Funcion para actualizar los datos de un usuario
     |   |-- api.js                               # Funcion para hacer peticiones a la API
     |   |-- apiUrls.js                           # Aquí se almacenan las urls donde se harán las peticiones
-    |   |-- flatpickrConfig.js                   # Aquí se almacenan un objeto con las configuraciones de flatpickr,. libreria para manejar la seleccion de fechas
+    |   |-- flatpickrConfig.js                   # Aquí se almacenan un objeto con las configuraciones de flatpickr, libreria para manejar la visualizacion de fechas
     |   |-- onClickHandler.js                    # Función para manejar eventos de clic comunes, donde se quita un componente y se muestra otro
     |-- main.js                                  # Componente principal de la aplicación
     |-- index.html                               # Punto de entrada de la aplicación
@@ -124,14 +127,14 @@ showNotification
     Muestra una notificación. Recibe como parámetros el texto de la aplicación, y un parámetro que será la class a la que se le aplicarán estilos css
 
 createButton
-    Componente button. Recibe el textContent, la función que dispara el click y un objeto cuyas propiedades se incluiran como atributos html
+    Componente button. Recibe el textContent, la función que dispara el click y un objeto cuyas propiedades se incluiran como atributos html. En muchos casos se aplica junto con la función onClickHandler.js Esta recibe dos parametros, el querySelector del contenedor y el componente a mostrar. Selecciona del DOM al contenedor, lo vacía y muestra el componente a mostrar.
 
 Configuración y Uso
 
-Para ejecutar la aplicación en un entorno de desarrollo local, siga estos pasos:
+Ejecutar la aplicación en un entorno de desarrollo local:
 
     Clonar el repositorio del proyecto desde GitHub.
     Navegar al directorio del proyecto.
     Instalar las dependencias utilizando npm install.
-    Ejecutar la aplicación utilizando npm start o npm run dev para utilizar nodemon.
-    La aplicación estará disponible en http://localhost:3000 en el navegador web.
+    Ejecutar la aplicación utilizando npm run dev para utilizar nodemon.
+    La aplicación estará disponible en el navegador web en http://localhost:3000.
