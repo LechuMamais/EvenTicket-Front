@@ -53,8 +53,8 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
     |   |-- apiUrls.js                           # Aquí se almacenan las urls donde se harán las peticiones
     |   |-- flatpickrConfig.js                   # Aquí se almacenan un objeto con las configuraciones de flatpickr,. libreria para manejar la seleccion de fechas
     |   |-- onClickHandler.js                    # Función para manejar eventos de clic comunes, donde se quita un componente y se muestra otro
-    |-- App.js                                   # Componente principal de la aplicación
-    |-- index.js                                 # Punto de entrada de la aplicación
+    main.js                                  # Componente principal de la aplicación
+    index.html                               # Punto de entrada de la aplicación
 
 
 Funcionalidades Principales
