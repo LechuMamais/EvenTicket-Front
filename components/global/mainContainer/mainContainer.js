@@ -42,8 +42,7 @@ export function mainContainer(userName = '') {
     async function loadContent() {
         try {
             // Si hay userId y accessToken tenemos que chequear que sean correctos.
-            // Para eso tenemos una ruta que recibe userId y accessToken, chequea que el user esté
-            // Autenticado, y devuelve sus datos.
+            // Para eso tenemos una ruta que recibe userId y accessToken, chequea que el user esté Autenticado, y devuelve sus datos.
             // Utiliza el mismo controller que getUserById, pero con el middleware de autenticación.
             const response = await fetchUserData(userId, accessToken, mainContainer);
 

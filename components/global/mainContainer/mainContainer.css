@@ -3,5 +3,5 @@
     display: flex;
     flex-direction: column;
     align-items: center; 
-    min-height: 90vh;
+    min-height: calc(100vh -(120px));
 }

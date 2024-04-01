@@ -14,7 +14,6 @@ import { UserEvents } from '../userEvents/userEvents';
 export const createProfile = async () => {
     window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     const userId = localStorage.getItem("userId");
-
     const mainContainer = document.querySelector("#main-container");
     if (userId == null) {
         mainContainer.innerHTML = "";
