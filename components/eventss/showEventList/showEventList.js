@@ -9,5 +9,5 @@ export const ShowEventList = (events) => {
         eventsContainer.appendChild(eventCard);
     });
 
-    return eventsContainer.innerHTML; // Devolvemos el HTML interno del contenedor
+    return eventsContainer.innerHTML; 
 };

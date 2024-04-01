@@ -53,15 +53,15 @@ Mejoras hechas:
 
 - Componetizar: Botones
 
+- Profile: lista separada para eventos pasados
+
+- Componetizar profile.js
+
 --------------------------------------------------------------------------------
 
 Próximas mejoras:
 
-- Profile: lista separada para eventos pasados
-
 - Hacer un calendario de eventos a los que el usuario va como asistente.
-
-- Perfil de usuario: Separar eventos futuros de eventos a los que ya ha asistido (pasados)
 
 - Filtros de busqueda: 
     - busqueda por palabras

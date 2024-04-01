@@ -38,7 +38,9 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
     |   |-- |-- loginForm                        # Componente de formulario de login
     |   |-- |-- profile                          # Componente de perfil de usuario
     |   |-- |-- registrationForm                 # Componente de formulario de registro
-    |   |-- |-- updateProfileForm                # Componente de actualizar datos de un usuario
+    |   |-- |-- updateProfileForm                # Componente de actualizar datos de un usuarioç
+    |   |-- |-- userInfo                         # Componente que muestra la informacion del usuario, y botones de update profile y logOut
+    |   |-- |-- userEvents                       # Componente que muestra una lista de eventos del usuario
     |-- utils/                                   # Utilidades y funciones auxiliares
     |   |-- eventss/                             # Utilidades y funciones relacionados a la gestion de eventos
     |   |-- |-- cancelAssistance                 # Funcion para cancelar asistencia a evento
@@ -96,6 +98,13 @@ registrationForm
 
 createProfile
     Muestra la información de perfil del usuario, incluído los eventos que está organizando, los eventos a los que asistirá, el boton de crear un evento nuevo, la posibilidad de modificar los datos de usuario.
+
+userEvents  
+    Crea una lista de eventos del usuario. Recibe varios parámetros: events, eventType, eventsContainerTitle, alt 
+    events es un array de eventos, eventType su tipo, que se usa para darle un id, alt es un texto que se mostrará si el array está vacío
+
+userInfo
+    Muestra el nombre de usuario, el email, un boton para actualizar esta información, y um boton de logout
 
 updateEventForm
     Modificar los datos de un evento. Sólo puede acceder a modificar los datos de un evento el usuario que lo haya creado.

@@ -1,0 +1,27 @@
+
+#user-info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.174);
+}
+
+#user-name-email {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: last baseline;
+}
+
+#user-name-email>p {
+    font-size: 14px;
+}
+
+#logOut-button {
+    width: 70px !important;
+    margin-left: 1rem !important;
+}
