@@ -1,6 +1,7 @@
 .event-card {
     position: relative;
     z-index: 1;
+    width: 100%;
     min-width: 600px;
     max-width: 1000px;
     flex-basis: 100%;

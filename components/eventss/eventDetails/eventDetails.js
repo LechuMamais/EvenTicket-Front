@@ -95,7 +95,7 @@ export const showEventDetails = async (eventId) => {
                 hour: 'numeric',
                 minute: 'numeric',
                 second: 'numeric',
-                timeZone: 'UTC' // Puedes ajustar la zona horaria según sea necesario
+                timeZone: 'UTC'
             };
 
             const formattedDateString = new Intl.DateTimeFormat('es-ES', options).format(formattedDate);

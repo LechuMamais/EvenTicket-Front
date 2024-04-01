@@ -21,13 +21,10 @@ export const createHeader = () => {
                 <li id="header-login-link-container" class="header-list-link link-container">
                     <a id="login-link">Login</a>
                 </li>
-                <li id="header-register-link-container" class="header-list-link link-container">
-                    <a id="header-register-link">Register</a>
-                </li>
             ` : ''}
-            <li id="header-events-link-container" class="header-list-link link-container">
+            <!--<li id="header-events-link-container" class="header-list-link link-container">
                 <a id="header-events-link">Eventos</a>
-            </li>
+            </li>-->
             ${isAuthenticated ? `
                 <li id="header-profile-link-container" class="header-list-link link-container">
                     <a id="header-profile-link">${userName}</a>
@@ -41,10 +38,9 @@ export const createHeader = () => {
 
     if (!isAuthenticated) {
         header.querySelector("#login-link").addEventListener("click", () => onClickHandler("#main-container", createLoginForm));
-        header.querySelector("#header-register-link").addEventListener("click", () => onClickHandler("#main-container", createRegistrationForm));
     }
 
-    header.querySelector("#header-events-link").addEventListener("click", () => onClickHandler("#main-container", showEvents));
+    //header.querySelector("#header-events-link").addEventListener("click", () => onClickHandler("#main-container", showEvents));
 
     if (isAuthenticated) {
         header.querySelector("#header-profile-link").addEventListener("click", () => onClickHandler("#main-container", createProfile));

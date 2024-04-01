@@ -47,4 +47,9 @@
 
 .image-element-container>h2{
     font-size: 100px;
+    color: var(--color-dark);
 }
+ .organizer,
+ .attendee{
+    cursor: pointer;
+ }

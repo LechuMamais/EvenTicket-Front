@@ -60,6 +60,22 @@ Mejoras hechas:
 --------------------------------------------------------------------------------
 
 Próximas mejoras:
+Correcciones de Santi:
+    Hechas:
+    - Quitar el register del Header
+    - Hacer login automáticamente después del register
+    - Arreglar este bug: Luego me parece raro que al hacer click en un usuario que ha organizado un evento, me lleve a mi perfil:
+        De hecho sobre todo porque no te lo esperas, ya que ni hay cursor pointer en el párrafo.
+        Para esto además, necesimos modificar todo el createProfile, para que se modifiquen los h2 y los botones.
+    - En profile, arreglar el eventListener de los eventos del calendario
+    - Al crear un evento y dejarlo todo vacío da un error que no tenemos controlado
+    - la página home y eventos son lo mismo pero con esa animación, dejaría sólo 1 -> He dejado solo la home
+    
+    Por hacer:
+    - Lo primero sería que preferiría que al entrar me mostrases esta página o por lo contrario una Home que me explique cómo funciona la página.
+    - Chequear la ubicación del footer, que quede siempre bien ubicado
+    - Titulos de eventos: buscar la manera de que se vean bien independientemente de los colores de las imagenes
+    - RESPONSIVE
 
 - Hacer un calendario de eventos a los que el usuario va como asistente.
 

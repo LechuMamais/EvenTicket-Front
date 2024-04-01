@@ -2,6 +2,7 @@ import { showNotification } from "../../components/global/showNotification/showN
 import { createLoginForm } from "../../components/users/loginForm/loginForm";
 import { makeRequest } from "../api";
 import { REGISTER_URL } from "../apiUrls";
+import { login } from "./login";
 
 export const register = async (formData)=>{
     try {
@@ -13,10 +14,8 @@ export const register = async (formData)=>{
         if (!response) {
             throw new Error("Error al registrar usuario");
         }
-        // Si se registra correctamente, lo pasamos al login con el userName ya rellenado
-        const mainContainer = document.querySelector("#main-container");
-        mainContainer.innerHTML = "";
-        mainContainer.appendChild(createLoginForm(response.userName));
+        // Si se registra correctamente, hacemos el login
+        login(formData)
     } catch (error) {
         console.error("Error al registrar usuario:", error.message);
         showNotification('Error al registrar usuario', 'error'), 5000;
