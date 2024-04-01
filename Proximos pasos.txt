@@ -76,7 +76,10 @@ Mejoras Futuras:
 
 - Cloudinary: subida de ficheros de imagenes a la nube.
 
-- Integración con API de envío de correo electrónico.
+- Integración con API de envío de correo electrónico:
+    Confirmacion al crear nuevo usuario
+    Avisos: Asistencia a evento, notificación x horas antes de un evento al que el usuario
+    va a asistir, creacion de evento, modificacion de evento, recuperación de contraseña...
 
 
 
