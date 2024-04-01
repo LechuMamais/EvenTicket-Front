@@ -3,7 +3,7 @@ import { login } from "../../../utils/users/login";
 import { createRegistrationForm } from "../registrationForm/registrationForm"; // Importa la función para crear el formulario de registro
 import "./loginForm.css";
 
-export const createLoginForm = (userName) => {
+export const createLoginForm = (userName = '') => {
     localStorage.clear();
     const form = document.createElement("form");
     form.id = "login-form";
