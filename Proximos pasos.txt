@@ -77,10 +77,12 @@ Correcciones de Santi:
     - Lo primero sería que preferiría que al entrar me mostrases esta página o por lo contrario una Home que me explique cómo funciona la página.
     - Acomodar el tema de los componentes de mainContainer y hero
     - Titulos de eventos: buscar la manera de que se vean bien independientemente de los colores de las imagenes: text-shadow
-    - Chequear la ubicación del footer, que quede siempre bien ubicado
     
     Por hacer:
     - RESPONSIVE
+        Hero: done
+    - Chequear la ubicación del footer, que quede siempre bien ubicado. Para eso tendremos que ver que pasa con la altura de homeContainer cuando
+        se hace scroll. Se achica el hero, y sube todo el resto del contenido, entonces que da espacio en blanco debajo del footer.
 
 
 - Hacer un calendario de eventos a los que el usuario va como asistente.

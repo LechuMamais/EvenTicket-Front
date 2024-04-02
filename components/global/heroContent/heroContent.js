@@ -21,8 +21,22 @@ export function heroContainer() {
     const headerHeight = document.querySelector('header').offsetHeight;
     const initialHeight = viewportHeight - headerHeight;
     heroContainer.style.height = `${initialHeight}px`;
-    // Definimos la altura mínima del héroe
-    const heroMinHeight = 150;
+    // Definimos la altura mínima del héroe. dependerá del ancho de la página
+    let heroMinHeight = 150;
+    let windowWidth = window.innerWidth;
+    console.log(windowWidth);
+    if (windowWidth < 600) {
+        heroMinHeight = 130
+    }
+    if (windowWidth < 500) {
+        heroMinHeight = 100
+    }
+    if (windowWidth < 400) {
+        heroMinHeight = 80
+    } 
+    if (windowWidth < 300) {
+        heroMinHeight = 60
+    } ;
     
     // Función para ajustar la altura del héroe al hacer scroll
     const adjustHeroHeight = () => {
@@ -39,11 +53,27 @@ export function heroContainer() {
     const initialTitleSize = 500;
     title.style.fontSize = `${initialTitleSize}px`; // Aplicar tamaño al título
 
+    
+
     // Función para ajustar el tamaño del título y el contenido debajo
     const adjustTitleSize = () => {
         const scrollPosition = window.scrollY;
         const maxTitleSize = 500; // Tamaño máximo del título en px
-        const minTitleSize = 100; // Tamaño mínimo del título en px
+        // Tamaño mínimo del título en px, dependerá del ancho de la ventana
+        let minTitleSize = 100;
+        let windowWidth = window.innerWidth;
+        if (windowWidth < 600) {
+            minTitleSize = 80
+        }
+        if (windowWidth < 500) {
+            minTitleSize = 66
+        }
+        if (windowWidth < 400) {
+            minTitleSize = 46
+        } 
+        if (windowWidth < 300) {
+            minTitleSize = 30
+        };
         const titleSize = Math.max(maxTitleSize - (scrollPosition * 0.8), minTitleSize); // Calcular tamaño del título
         title.style.fontSize = `${titleSize}px`; // Aplicar tamaño al título
     };
