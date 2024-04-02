@@ -7,8 +7,8 @@
     justify-content: space-around;
     gap: 1rem;
     flex-wrap: wrap;
-    position: absolute;
-    bottom: 60px;
+    /*position: absolute;*/
+    /*bottom: 60px;*/
 }
 
 #user-name-email {

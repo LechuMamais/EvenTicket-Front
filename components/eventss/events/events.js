@@ -33,18 +33,13 @@ export const showEvents = async () => {
             //console.log('Modificando events container margin top')
             const heroContainer = document.querySelector('.hero-container');
             const heroContainerActualHeight = heroContainer.offsetHeight;
-            //console.log(heroContainer);
             const headerHeight = document.querySelector('header').offsetHeight;
-            //console.log(headerHeight);
             const headerAndHeroHeight = heroContainerActualHeight + headerHeight;
             const scrollPosition = window.scrollY;
 
-            //console.log(scrollPosition);
             if(heroContainerActualHeight < heroContainerPreviousHeight){
-                //console.log('Estas scrolleando hacia abajo');
                 eventsContainer.style.marginTop = `${headerAndHeroHeight+scrollPosition}px`;
             }else if(heroContainerActualHeight > heroContainerPreviousHeight){
-                //console.log('Estas scrolleando hacia arriba')
                 eventsContainer.style.marginTop = `${headerAndHeroHeight+scrollPosition}px`;
             }
 

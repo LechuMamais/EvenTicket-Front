@@ -16,7 +16,7 @@ export const createLoginForm = (userName = '') => {
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password">
         
-        <button id="submit-button" type="submit">Iniciar Sesión</button>
+        <button id="submit-button" class="button-big button" type="submit">Iniciar Sesión</button>
         <button id="register-button">¿No te has registrado?</button> <!-- Botón de registro -->
     `;
 

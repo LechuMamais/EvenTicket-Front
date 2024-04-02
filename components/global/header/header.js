@@ -1,11 +1,9 @@
 import './header.css'
 import { createLoginForm } from "../../users/loginForm/loginForm";
-import { createRegistrationForm } from "../../users/registrationForm/registrationForm";
 import { createProfile } from "../../users/profile/profile";
-import { showEvents } from "../../eventss/events/events";
 import { home } from "../home/home";
 import { onClickHandler } from '../../../utils/onClickHandler';
-
+//import { showEvents } from "../../eventss/events/events";
 
 export const createHeader = () => {
     const isAuthenticated = localStorage.getItem("userId") && localStorage.getItem("accessToken");
@@ -33,8 +31,8 @@ export const createHeader = () => {
         </ul>
     `;
 
-    // Agregar event listeners
-    header.querySelector("#home-link").addEventListener("click", () => onClickHandler("#app", home));
+    // Agregamos event listeners
+    header.querySelector("#home-link").addEventListener("click", () => onClickHandler("#main-container", home));
 
     if (!isAuthenticated) {
         header.querySelector("#login-link").addEventListener("click", () => onClickHandler("#main-container", createLoginForm));

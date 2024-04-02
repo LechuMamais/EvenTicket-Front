@@ -24,14 +24,3 @@
 #registration-form>label{
     margin-bottom: 0.5rem;
 }
-
-#registration-form>button{
-    font-size: 1rem;
-    width: 12.5rem;
-    padding: 0.5rem;
-    cursor: pointer;
-}
-
-#submit-button{
-    margin-top: 1rem;
-}

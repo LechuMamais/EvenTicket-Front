@@ -181,7 +181,7 @@ export const showEventDetails = async (eventId) => {
                 eventDetailsContainer.appendChild(updateButton);
 
                 // Llamamos al componente createButton y le pasamos la funcion que elimina evento, que importamos de utils
-                const deleteEventButton = createButton("Eliminar evento", async () => { deleteEvent(eventId) }, { id: "delete-event-button", class: "button-primary" });
+                const deleteEventButton = createButton("Eliminar evento", async () => { deleteEvent(eventId) }, { id: "delete-event-button", class: "button-delete" });
                 eventDetailsContainer.appendChild(deleteEventButton);
             }
 

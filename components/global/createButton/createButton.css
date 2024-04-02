@@ -1,0 +1,20 @@
+/*BOTONES*/
+button {
+    cursor: pointer;
+    border-radius: 4px;
+    width: 200px;
+    padding: 8px 14px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.button-primary {}
+
+.button-big {
+    font-size: 1rem;
+}
+
+.button-delete {
+    background-color: rgb(103, 41, 41);
+}

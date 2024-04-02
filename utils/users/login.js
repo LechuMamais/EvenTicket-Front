@@ -2,8 +2,15 @@ import { showNotification } from "../../components/global/showNotification/showN
 import { makeRequest } from "../api";
 import { LOGIN_URL } from "../apiUrls";
 
-export const login = async (formData)=>{
+export const login = async (formData) => {
     try {
+        // Verificar si se ingresaron todos los campos
+        if (!formData.userName || !formData.password) {
+            showNotification('Por favor, completa todos los campos.', 'error', 5000);
+            return;
+        }
+        
+        // Realizar la petición a la API
         const response = await makeRequest(LOGIN_URL, 'POST', formData)
         if (!response) {
             throw new Error("Error al iniciar sesión");

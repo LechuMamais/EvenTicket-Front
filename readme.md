@@ -25,7 +25,6 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
     |   |-- |-- events                           # Componente que muestra la lista de eventos y filtros de busqueda
     |   |-- |-- searchEventsFiltersContainer     # Componente de filtros de busqueda
     |   |-- |-- showEventCard                    # Componente de tarjeta de evento
-    |   |-- |-- showEventList                    # Componente de lista de tarjetas de eventos
     |   |-- |-- updateEventForm                  # Componente de actualizar datos de un evento
     |   |-- global/                              # Componentes globales
     |   |-- |-- createButton                     # Componente que muestra un nuevo boton. 

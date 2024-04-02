@@ -57,6 +57,10 @@ Mejoras hechas:
 
 - Componetizar profile.js
 
+- Register: Validación en el front.
+
+- Ligin: Validación en el front.
+
 --------------------------------------------------------------------------------
 
 Próximas mejoras:
@@ -70,12 +74,14 @@ Correcciones de Santi:
     - En profile, arreglar el eventListener de los eventos del calendario
     - Al crear un evento y dejarlo todo vacío da un error que no tenemos controlado
     - la página home y eventos son lo mismo pero con esa animación, dejaría sólo 1 -> He dejado solo la home
+    - Lo primero sería que preferiría que al entrar me mostrases esta página o por lo contrario una Home que me explique cómo funciona la página.
+    - Acomodar el tema de los componentes de mainContainer y hero
+    - Titulos de eventos: buscar la manera de que se vean bien independientemente de los colores de las imagenes: text-shadow
+    - Chequear la ubicación del footer, que quede siempre bien ubicado
     
     Por hacer:
-    - Lo primero sería que preferiría que al entrar me mostrases esta página o por lo contrario una Home que me explique cómo funciona la página.
-    - Chequear la ubicación del footer, que quede siempre bien ubicado
-    - Titulos de eventos: buscar la manera de que se vean bien independientemente de los colores de las imagenes
     - RESPONSIVE
+
 
 - Hacer un calendario de eventos a los que el usuario va como asistente.
 

@@ -19,7 +19,7 @@ export const createRegistrationForm = () => {
         <label for="password">Repite la contraseña:</label><br>
         <input type="password" id="password-repeat" name="password-repeat"><br>
         
-        <button type="submit">Registrarse</button>
+        <button type="submit" class="button button-big">Registrarse</button>
     `;
 
     form.addEventListener("submit", async (event) => {
@@ -31,6 +31,7 @@ export const createRegistrationForm = () => {
             password: form.querySelector("#password").value,
             passwordRepeat: form.querySelector("#password-repeat").value
         };
+
 
         register(formData);
     });

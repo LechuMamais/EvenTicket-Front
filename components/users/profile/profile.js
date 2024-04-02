@@ -124,7 +124,10 @@ export const createProfile = async (profileId = '') => {
         userEventsAsAssistantContainer.appendChild(showFutureEventsAsAttendee);
         userEventsAsAssistantContainer.appendChild(showPastEventsAsAttendee);
 
-        const showEventsButton = createButton("Más eventos disponibles", () => {
+        // Boton para ir a lista de eventos. Tendrá un texto diferente si hay o no eventos en la lista de eventos como asistente
+        const showEventsButtonText = futureAssistantEvents.length === 0 ? 'Ver eventos disponibles' : 'Más eventos disponibles';
+
+        const showEventsButton = createButton(showEventsButtonText, () => {
             onClickHandler('#main-container', () => showEvents())
         }, { id: "show-events-button", class: "button-primary" });
 
