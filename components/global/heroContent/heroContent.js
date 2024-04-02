@@ -24,7 +24,6 @@ export function heroContainer() {
     // Definimos la altura mínima del héroe. dependerá del ancho de la página
     let heroMinHeight = 150;
     let windowWidth = window.innerWidth;
-    console.log(windowWidth);
     if (windowWidth < 600) {
         heroMinHeight = 130
     }

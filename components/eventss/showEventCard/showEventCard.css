@@ -17,6 +17,7 @@
 }
 
 .event-card > h3 {
+    max-width: 100svw;
     z-index: 10;
     color: var(--color-dark);
     opacity: 80%;

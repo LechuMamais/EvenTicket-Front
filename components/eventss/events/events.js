@@ -36,11 +36,12 @@ export const showEvents = async () => {
             const headerHeight = document.querySelector('header').offsetHeight;
             const headerAndHeroHeight = heroContainerActualHeight + headerHeight;
             const scrollPosition = window.scrollY;
+            const adjustParams = -60;
 
             if(heroContainerActualHeight < heroContainerPreviousHeight){
-                eventsContainer.style.marginTop = `${headerAndHeroHeight+scrollPosition}px`;
+                eventsContainer.style.marginTop = `${headerAndHeroHeight+scrollPosition+adjustParams}px`;
             }else if(heroContainerActualHeight > heroContainerPreviousHeight){
-                eventsContainer.style.marginTop = `${headerAndHeroHeight+scrollPosition}px`;
+                eventsContainer.style.marginTop = `${headerAndHeroHeight+scrollPosition+adjustParams}px`;
             }
 
             heroContainerPreviousHeight= heroContainerActualHeight

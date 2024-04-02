@@ -2,7 +2,7 @@ import { showEvents } from '../../eventss/events/events';
 import { heroContainer } from '../heroContent/heroContent';
 import './home.css';
 
-async function loadContent(homeContainer) {
+export async function loadContent(homeContainer) {
     try {
         const hero = heroContainer()
         const events = await showEvents();

@@ -55,4 +55,25 @@ body{
   .event-card{
     height: 200px !important;
   }
+  .event-card > h3{
+    font-size: 60px !important;
+  }
+}
+@media screen and (max-width: 550px) {
+  .event-card > h3{
+    font-size: 50px !important;
+  }
+}
+@media screen and (max-width: 450px) {
+  .event-card > h3{
+    font-size: 40px !important;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #filter-by-date-container{
+    flex-direction: column;
+    align-items: baseline !important;
+  }
+
 }
