@@ -33,6 +33,7 @@
 
 body{
   min-height: 100svh;
+  overflow-x: hidden;
 }
 
 #app{
@@ -50,6 +51,18 @@ body{
 
 /* ----------------------------------------------------------------   RESPONSIVE   ---------------------------------------------------------------------*/
 
+/* EventCard: Profile + Home */
+@media screen and (max-width: 768px) {
+  .events-container{
+    width: 100% !important;
+  }
+  #user-events-container{
+    width: 100% !important;
+  }
+  #user-events-container h2{
+    padding: 0 2.5% 0.75rem 2.5% !important;
+  }
+}
 
 @media screen and (max-width: 700px) {
   .event-card{
@@ -59,21 +72,37 @@ body{
     font-size: 60px !important;
   }
 }
+
 @media screen and (max-width: 550px) {
   .event-card > h3{
     font-size: 50px !important;
   }
 }
+
 @media screen and (max-width: 450px) {
+  .event-card{
+    height: 160px !important;
+    max-width: 100vw !important;
+  }
   .event-card > h3{
     font-size: 40px !important;
   }
+  .user-events-container h2{
+    font-size: 19px !important;
+  }
 }
 
+/* searchFilters */
 @media screen and (max-width: 550px) {
   #filter-by-date-container{
     flex-direction: column;
     align-items: baseline !important;
   }
+}
 
+@media screen and (max-width: 450px) {
+  #search-events-filters-container h3{
+    font-size: 19px !important;
+    line-height: 48px !important;
+  }
 }

@@ -1,14 +1,12 @@
 
 #user-info-container {
     width: 100%;
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    gap: 1rem;
     flex-wrap: wrap;
-    /*position: absolute;*/
-    /*bottom: 60px;*/
 }
 
 #user-name-email {
@@ -16,6 +14,11 @@
     flex-direction: row;
     gap: 1rem;
     align-items: last baseline;
+    padding: 0 1rem;
+}
+
+#user-options-container {
+    padding: 0 1rem;
 }
 
 #user-name-email>p {

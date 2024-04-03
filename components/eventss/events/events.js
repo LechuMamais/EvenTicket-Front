@@ -2,6 +2,7 @@ import "./events.css";
 import { searchEventsFiltersContainer } from "../searchEventsFiltersContainer/searchEventsFiltersContainer.js";
 import { getEventsList } from "../../../utils/events/getEventsList.js";
 
+
 export const showEvents = async () => {
     window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     try {
@@ -16,12 +17,13 @@ export const showEvents = async () => {
         // Crear un elemento div para contener la lista de eventos
         const eventsCardContainer = document.createElement('div');
         eventsCardContainer.classList.add('events-card-container');
-
+        
         // Le pasamos el objeto de fechas vacias para que muestre sólo los eventos que aún no pasaron
         getEventsList({}, eventsCardContainer);
-
+        
         eventsContainer.appendChild(eventsCardContainer);
 
+        
 
         //  -----------------------------------     EVENTS CONTAINER MODIFIER     -------------------------------- //
 

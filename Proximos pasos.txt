@@ -85,7 +85,7 @@ Correcciones de Santi:
         Search Filters: done
         Event card: done
         Header: depende el largo del nombre del usuario!
-        Profile
+        Profile: Ajustar tamaños de elementos
 
     - Chequear la ubicación del footer, que quede siempre bien ubicado. Para eso tendremos que ver que pasa con la altura de homeContainer cuando
         se hace scroll. Se achica el hero, y sube todo el resto del contenido, entonces que da espacio en blanco debajo del footer.

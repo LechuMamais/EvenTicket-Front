@@ -30,15 +30,22 @@
     transition: transform 0.2s ease;
 }
 #event-title-container{
-    width: 100%;
     position: relative;
+    width: 100%;
     z-index: 120;
     background-color: var(--color-dark);
     padding-top: 0;
 }
+
 #event-title-container>h3{
+    position: relative;
     width: 100%;
     line-height: 82px;
+    font-size: 30px;
+    font-weight: lighter;
+    letter-spacing: 0.15px;
+    padding-bottom: 2px;
+    border-bottom: solid 1px var(--color-white);
 }
 
 

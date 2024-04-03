@@ -32,11 +32,11 @@ export function heroContainer() {
     }
     if (windowWidth < 400) {
         heroMinHeight = 80
-    } 
+    }
     if (windowWidth < 300) {
         heroMinHeight = 60
-    } ;
-    
+    };
+
     // Función para ajustar la altura del héroe al hacer scroll
     const adjustHeroHeight = () => {
         const scrollPosition = window.scrollY;
@@ -52,9 +52,7 @@ export function heroContainer() {
     const initialTitleSize = 500;
     title.style.fontSize = `${initialTitleSize}px`; // Aplicar tamaño al título
 
-    
-
-    // Función para ajustar el tamaño del título y el contenido debajo
+    // Función para ajustar el tamaño del título
     const adjustTitleSize = () => {
         const scrollPosition = window.scrollY;
         const maxTitleSize = 500; // Tamaño máximo del título en px
@@ -69,7 +67,7 @@ export function heroContainer() {
         }
         if (windowWidth < 400) {
             minTitleSize = 46
-        } 
+        }
         if (windowWidth < 300) {
             minTitleSize = 30
         };
@@ -79,6 +77,7 @@ export function heroContainer() {
 
     // Agregar efecto de ajuste de tamaño al hacer scroll
     window.addEventListener('scroll', adjustTitleSize);
-    
+
+
     return heroContainer;
 }
