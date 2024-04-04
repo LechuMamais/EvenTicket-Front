@@ -86,6 +86,9 @@ Correcciones de Santi:
         Event card: done
         Header: depende el largo del nombre del usuario!
         Profile: Ajustar tamaños de elementos
+    Para el efecto del titulo en el hero, voy a hacer una función en utils que se va a llamar despues de cargar un nuevo contenedor, y se va a ejecutar
+    dependiendo de si se encuentra o no el heroContainer en el dom. En base a eso, es aplicaran unos estilos u otros. La vamos a llamar dentro de onClickHandler.
+    
 
     - Chequear la ubicación del footer, que quede siempre bien ubicado. Para eso tendremos que ver que pasa con la altura de homeContainer cuando
         se hace scroll. Se achica el hero, y sube todo el resto del contenido, entonces que da espacio en blanco debajo del footer.

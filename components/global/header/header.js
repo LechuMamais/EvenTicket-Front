@@ -5,6 +5,8 @@ import { home } from "../home/home";
 import { onClickHandler } from '../../../utils/onClickHandler';
 //import { showEvents } from "../../eventss/events/events";
 
+
+
 export const createHeader = () => {
     const isAuthenticated = localStorage.getItem("userId") && localStorage.getItem("accessToken");
     const userName = localStorage.getItem("userName");
@@ -33,6 +35,7 @@ export const createHeader = () => {
             ` : ''}
         </ul>
     `;
+    header.style.backgroundImage = ''; // Vacía el fondo del header
 
     // Agregamos event listeners
     header.querySelector("#home-link").addEventListener("click", () => onClickHandler("#main-container", home));
@@ -46,6 +49,8 @@ export const createHeader = () => {
     if (isAuthenticated) {
         header.querySelector("#header-profile-link").addEventListener("click", () => onClickHandler("#main-container", createProfile));
     }
+
+
 
     return header;
 }

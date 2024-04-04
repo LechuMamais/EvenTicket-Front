@@ -20,7 +20,7 @@ header {
     max-width: 1250px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 1rem;
     padding: 1rem 0;
 }
@@ -29,7 +29,7 @@ header {
     cursor: pointer;
     text-decoration: none;
     /*transition: all 500ms;*/
-    transition: all 0.05s linear;
+    /*transition: all 0.05s linear;*/
     /*border: 1px solid transparent;*/
 }
 
@@ -43,5 +43,8 @@ header {
 
 #header-empty-link-container a {
     color: rgba(0, 128, 0, 0) !important;
-    cursor: default;
+}
+
+#header-empty-link-container {
+    cursor:unset;
 }
