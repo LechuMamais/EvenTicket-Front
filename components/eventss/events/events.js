@@ -29,7 +29,7 @@ export const showEvents = async () => {
 
         // Si a la vez que se visualiza el hero también hay un events container debajo, vamos a darle margen suficiente para que quepa
 
-        var heroContainerPreviousHeight
+        /*var heroContainerPreviousHeight
         // Funcion de ajustarle el margin top al eventsContainer para que se ubique debajo del hero.
         const eventsContainerMarginTop = () => {
             //console.log('Modificando events container margin top')
@@ -55,7 +55,7 @@ export const showEvents = async () => {
             if (eventsContainer && heroContainer) {
                 eventsContainerMarginTop();
             }
-        });
+        });*/
 
         // Agregar el contenedor de eventos al DOM
         return eventsContainer;

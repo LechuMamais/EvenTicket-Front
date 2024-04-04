@@ -12,8 +12,11 @@ export const createHeader = () => {
     const header = document.createElement("header");
     header.innerHTML = `
         <ul id="header-list">
+            <li id="header-empty-link-container" class="header-list-link link-container">
+                <a id="empty-link">${userName}</a>
+            </li>
             <li id="header-home-link-container" class="header-list-link link-container">
-                <a id="home-link">Home</a>
+                <a id="home-link">INSOMNIA</a>
             </li>
             ${!isAuthenticated ? `
                 <li id="header-login-link-container" class="header-list-link link-container">
