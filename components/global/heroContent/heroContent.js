@@ -118,7 +118,7 @@ export function heroContainer() {
     heroContainer.style.height = `${initialHeight}px`;
     // Y el marginTop, que es -la altaura del header
     const header = document.querySelector('header');
-    console.log(`-${(header.offsetHeight)}px`)
+    //console.log(`-${(header.offsetHeight)}px`)
     heroContainer.style.marginTop = `-${(header.offsetHeight)}px`;
 
     headerTitleModifier()
