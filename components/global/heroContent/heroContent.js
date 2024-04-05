@@ -1,62 +1,48 @@
 import './heroContent.css';
 
-
-const TitleSizeModifier = (headerTitle) => {
-    //console.log('TitleSizeModifier');
-    const maxTitleSize = 160
-    headerTitle.style.fontSize = `${maxTitleSize}px`
-    return maxTitleSize;
-};
-
-
-export const headerTitleModifier = () => {
-    
-    // Modificador, que ubica al titulo en el centro del viewport
-    const headerTitleContainer = document.querySelector('#header-home-link-container a');
+const headerInitialMarginCalculator = () => {
+    const headerContainer = document.querySelector('header');
     const headerTitle = document.querySelector('#header-home-link-container');
-    // Y además llama a la función que le da el tamaño inicial
-    TitleSizeModifier(headerTitleContainer);
-    //console.log('headerTitleModifier');
-    //console.log('headerTitle', headerTitle);
     const viewportHeight = window.innerHeight;
-    //console.log('viewportHeight', viewportHeight);
-    //console.log('HeaderTitleInnerHeight', headerTitle.clientHeight)
-    const headerTitleMarginTop = (viewportHeight * 0.5) - (headerTitle.clientHeight * 0.5);
-    //console.log('headerTitleMarginTop', headerTitleMarginTop);
-    headerTitle.style.marginTop = `${headerTitleMarginTop}px`;
+    const headerTitleMarginTop = (viewportHeight * 0.5) - (headerTitle.clientHeight * 0.5) - (headerContainer.clientHeight * 0.5)/**/;
+    console.log('viewportHeight', viewportHeight);
+    console.log('headerTitle.clientHeight', headerTitle.clientHeight);
+    console.log('headerTitle', headerTitle)
+    //headerTitle.style.marginTop = `${headerTitleMarginTop}px`;
+    return headerTitleMarginTop
+}
 
-};
-
-const scrollHandler = () => {
-    // Las modificaciones al scrollHandler las queremos sólo cuando está el hero
-    const heroContainer = document.querySelector('.hero-container');
-    if (!heroContainer) { return }
-
-    // Modificamos la posicion del title
-    const scrollTop = window.scrollY;
-    //console.log('scrollTop', scrollTop);
-
-    const parallaxFactor = 0.1; // Factor de parallax 
-
+const headerMarginScrollModifier = (scrollTop) => {
+    // Modificamos el marginTop del title
+    const parallaxFactor = 0.5; // Modificador del scrollTop Position
     const headerTitleContainer = document.querySelector('#header-home-link-container');
-    const headerTitlePrevMarginTop = headerTitleContainer.clientHeight
+    const headerTitlePrevMarginTop = headerInitialMarginCalculator();
+    console.log('headerTitlePrevMarginTop', headerTitlePrevMarginTop);
     const translateY = scrollTop * parallaxFactor;
-    const headerTitleContainerMarginTop = Math.max(headerTitlePrevMarginTop - translateY, 0)
+    const headerTitleContainerMarginTop = Math.max(headerTitlePrevMarginTop - translateY, 0);
     headerTitleContainer.style.marginTop = `${headerTitleContainerMarginTop}px`;
+    console.log('headerTitleContainerMarginTop', headerTitleContainerMarginTop);
+}
 
+const maxTitleSizeCalculator = () => {
+    const viewportWidth = window.innerWidth;
+    const sizeCorrectorParam = 1/7;
+    const maxTitleSize = viewportWidth*sizeCorrectorParam;
+    return maxTitleSize;
+}
 
-    // Modificamos el tamaño del title
+const headerFontSizeScrollModifier = (scrollTop) => {
+    // Modificamos el fontSize del title
     // Cuando scrollTop sea viewportHeigth-headerHeight, que fontSize sea 20px
-
     const headerTitle = document.querySelector('#header-home-link-container a');
-    const maxTitleSize = 160;
+    const maxTitleSize = maxTitleSizeCalculator();
+    console.log('maxTitleSize',maxTitleSize)
     const minTitleSize = 20;
     const headerContainer = document.querySelector('header')
     const headerHeight = headerContainer.clientHeight
 
     const viewportHeight = window.innerHeight;
-    const scrollTopBreakPoint = ((viewportHeight - headerHeight) - headerHeight );
-    //console.log('scrollTopBreakPoint', scrollTopBreakPoint);
+    const scrollTopBreakPoint = ((viewportHeight - headerHeight) - headerHeight);
     // En scrollTopBreakPoint queremos que fontSize = 20
     // En scrollTop = 0 queremos que fontSize = 200
     // Y en el medio, una transicion. O sea fontSize = (scrollTopBreakPoint-scrollTop)/scrollTopBreakPoint *(maxTitleSize-minTitleSize)*maxTitleSize
@@ -64,25 +50,17 @@ const scrollHandler = () => {
     const actualTitleSize = ((scrollTopBreakPoint - scrollTop) / scrollTopBreakPoint * maxTitleSize);
     headerTitle.style.fontSize = `${Math.max(actualTitleSize, minTitleSize)}px`;
 
+}
 
+const headerBackgroundSetter = (scrollTop, heroContainer) => {
     // Fijar el hero para que quede como fondo del header
-    // Para eso necesitamos haremos que cuando al hacer scroll se llegue a la posicion donde el hero se vea la misma altura del header, le
+    // Para eso haremos que cuando al hacer scroll se llegue a la posicion donde el hero se vea la misma altura del header, le
     // ponemos background al header. Despues, si se vuelve a hacer scroll hacia arriba, hay que volverselo a quitar
 
-    //const heroContainer = document.querySelector('.hero-container');
+    const headerContainer = document.querySelector('header');
+    const headerHeight = headerContainer.clientHeight;
     const heroHeight = heroContainer.clientHeight;
 
-    //console.log('heroHeight = viewportHeight = ', heroHeight);
-    //console.log('viewportHeight-scrollTopAjustado', viewportHeight - scrollTop)
-
-    //console.log('scrollTop', scrollTop);
-
-    // backgroundImage: px = 549x366
-
-    //console.log('scrollTopAjustado', scrollTop);
-    //console.log('(heroHeight)', (heroHeight));
-
-    // La logica de los if está correcta
     if (scrollTop > (heroHeight - headerHeight)) {
         //En este caso, le agregamos el fondo al header
         //console.log('agregamos background al header')
@@ -94,10 +72,28 @@ const scrollHandler = () => {
         //console.log('El header tiene el hero debajo')
         headerContainer.style.backgroundImage = ''; // Vacía el fondo del header
     }
+}
+
+const scrollHandler = () => {
+    // Las modificaciones al header las queremos sólo cuando está el hero
+    const heroContainer = document.querySelector('.hero-container');
+    if (!heroContainer) { return }
+    const scrollTop = window.scrollY;
+    // Funciones que modifican el Header:
+    headerFontSizeScrollModifier(scrollTop);    // fontSize
+    headerMarginScrollModifier(scrollTop);      // marginTop
+    headerBackgroundSetter(scrollTop, heroContainer)           // background
 
 }
 
+export const headerTitleModifier = () => {
+    const scrollTop = window.scrollY;
+    console.log(scrollTop)
 
+    headerFontSizeScrollModifier(scrollTop);
+    headerMarginScrollModifier(scrollTop);
+
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

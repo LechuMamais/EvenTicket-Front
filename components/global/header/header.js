@@ -14,14 +14,14 @@ export const createHeader = () => {
     const header = document.createElement("header");
     header.innerHTML = `
         <ul id="header-list">
-            <li id="header-empty-link-container" class="header-list-link link-container">
+            <!--<li id="header-empty-link-container" class="header-list-link link-container">
                 <a id="empty-link">${userName}</a>
-            </li>
+            </li>-->
             <li id="header-home-link-container" class="header-list-link link-container">
                 <a id="home-link">INSOMNIA</a>
             </li>
             ${!isAuthenticated ? `
-                <li id="header-login-link-container" class="header-list-link link-container">
+                <li id="header-login-link-container" class="header-list-link link-container right-header-link">
                     <a id="login-link">Login</a>
                 </li>
             ` : ''}
@@ -29,7 +29,7 @@ export const createHeader = () => {
                 <a id="header-events-link">Eventos</a>
             </li>-->
             ${isAuthenticated ? `
-                <li id="header-profile-link-container" class="header-list-link link-container">
+                <li id="header-profile-link-container" class="header-list-link link-container right-header-link">
                     <a id="header-profile-link">${userName}</a>
                 </li>
             ` : ''}

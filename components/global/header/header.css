@@ -1,7 +1,7 @@
 header {
     background-color: var(--color-white);
     background-color: transparent !important;
-    height: 60px;
+    height: 62px;
     position: sticky;
     top: 0px;
     z-index: 150;
@@ -18,10 +18,10 @@ header {
     margin: 0 auto;
     width: 90svw;
     max-width: 1250px;
-    display: flex;
+    /*display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 1rem;*/
     padding: 1rem 0;
 }
 
@@ -41,10 +41,25 @@ header {
     text-transform: uppercase;
 }
 
+#header-home-link-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-header-link{
+    position: fixed;
+    top: 1rem;
+    right: 5vw;
+}
+
+
+/*------------------------------------------------------------------------------------------------------------*/
+
 #header-empty-link-container a {
     color: rgba(0, 128, 0, 0) !important;
 }
 
 #header-empty-link-container {
-    cursor:unset;
+    cursor: unset;
 }

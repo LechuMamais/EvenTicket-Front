@@ -17,8 +17,4 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener('resize', function () {
   // Si el usuario modifica manualmente el tamaño del dom, necesitamos recargar algunos elementos que tienen estilos en linea
   resizeDomActualization();
-
-  // Llamamos a la función para dar estilos iniciales al header, que actua sólo si está cargado el hero
-  //giveHeaderHomeTitleInitialStyles();
-
 });
