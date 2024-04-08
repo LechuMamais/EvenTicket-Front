@@ -50,4 +50,5 @@ footer {
 
 .footer-list-bottom a{
     color: var(--color-header-left);
+    font-weight: 600;
 }

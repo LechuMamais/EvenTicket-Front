@@ -23,7 +23,7 @@ export const showEvents = async () => {
         
         eventsContainer.appendChild(eventsCardContainer);
 
-        // Agregar el contenedor de eventos al DOM
+        // Y devolvemos el contenedor de eventos para mostrarlos (en home)
         return eventsContainer;
 
     } catch (error) {

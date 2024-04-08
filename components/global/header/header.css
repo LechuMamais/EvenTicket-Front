@@ -55,22 +55,30 @@ header {
 
 
 /*------------------------------------------------------------------------------------------------------------*/
-#header-profile-link-container {
+.right-header-link {
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    border: 2px solid transparent !important;
+    border: 1.5px solid transparent;
     transition: all 100ms linear;
+    opacity: 0.8;
 }
 
-#header-profile-link-container a {
-    margin-top: -1px;
+.right-header-link a {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#header-profile-link-container:hover {
-    border: 2px solid var(--color-dark) !important;
+.right-header-link:hover {
+    border: 1.5px solid var(--color-dark);
+    
     scale: 1.03;
+    opacity: 1;
+}
+#profile-link{
+    margin-top: -1px;
+}
+#login-link{
+    margin-left: -6px;
 }
