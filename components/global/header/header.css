@@ -1,5 +1,4 @@
 header {
-    background-color: var(--color-white);
     background-color: transparent !important;
     height: 62px;
     position: sticky;
@@ -34,7 +33,7 @@ header {
 }
 
 .link-container>a {
-    color: var(--color-dark) !important;
+    color: var(--color-white) !important;
     font-weight: 600;
     font-size: 20px;
     font-weight: normal;
@@ -71,7 +70,7 @@ header {
 }
 
 .right-header-link:hover {
-    border: 1.5px solid var(--color-dark);
+    border: 1.5px solid var(--color-white);
     
     scale: 1.03;
     opacity: 1;

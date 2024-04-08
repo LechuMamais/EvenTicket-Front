@@ -11,18 +11,18 @@
   
   
   
-  --color-dark: #e6e6e6;
+  --color-white: #e6e6e6;
   --color-light: #82A5C8;
   --color-medium: #427DB3;
   --color-important: #9E645A;
-  --color-white: #000000;
+  --color-dark: #000000;
 
   --color-header-left: #CB8C64;
   --color-header-right: #9B1D38;
   
   color-scheme: light dark;
-  color: var(--color-white);
-  background-color: var(--color-dark);
+  color: var(--color-dark);
+  background-color: var(--color-white);
   
 }
 

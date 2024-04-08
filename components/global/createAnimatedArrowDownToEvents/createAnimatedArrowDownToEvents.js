@@ -5,6 +5,14 @@ export const giveArrowLeftMargin = (arrowDownToEvents)=>{
     // Para ubicarlo en el centro le ponemos de left la mitad del viewport - 1/2 de su tamaño y su padding left
     arrowDownToEvents.style.left = `${(viewportWidth * 0.5)-((32+32)/2)}px`;
 }
+
+export const removeArrowDownToEvents = ()=>{
+    const arrowDownToEvents = document.getElementById('arrow-down-to-events');
+    if(arrowDownToEvents){
+        arrowDownToEvents.parentElement.removeChild(arrowDownToEvents);
+    }
+}
+
 const giveArrowTopMargin = (arrowDownToEvents)=>{
     const scrollTop = window.scrollY;
     const viewportHeight = window.innerHeight;
@@ -21,13 +29,13 @@ const scrollToEvents = () => {
 }
 const hideOrShowOnScroll = (arrowDownToEvents,viewportHeight) => {
     const scrollTop = window.scrollY;
-    const hideParameter = 0.35;
+    const hideParameter = 0.3;
     // Ocultar
     if(scrollTop>=viewportHeight*hideParameter){
         arrowDownToEvents.style.color = 'transparent';
     }else{
         // Volver a mostrar si se scroll hacia arriba
-        arrowDownToEvents.style.color = 'var(--color-dark)';
+        arrowDownToEvents.style.color = 'var(--color-white)';
     }
 }
 
@@ -46,8 +54,8 @@ export const createAnimatedArrowDownToEvents = (container) =>{
 
     // Que se haga visible después de un tiempo. Lo hacemos con style.color para que tenga transicion.
     setTimeout(() => {
-        arrowDownToEvents.style.color= 'var(--color-dark)'
-    },'1000');
+        arrowDownToEvents.style.color= 'var(--color-white)'
+    },'1200');
     // Luego, le daremos el addEventListener: click
     arrowDownToEvents.addEventListener('click', () => {
         scrollToEvents()

@@ -44,7 +44,7 @@
     font-size: 22px;
     font-weight: normal;
     padding-bottom: 2px;
-    border-bottom: solid 1px var(--color-white);
+    border-bottom: solid 1px var(--color-dark);
 }
 
 #user-events-container h4{
