@@ -54,39 +54,46 @@ export const searchEventsFiltersContainer = async () => {
         // Obtiene la posición actual de la página al hacer scroll
         const currentScrollPosition = window.pageYOffset;
         const eventCardContainer = document.querySelector('.events-card-container');
+        const headerHeight = document.querySelector('header').style.height;
+        // Si aún se ve el hero (y el scroll no viene de AnimatedArrowDownToEvents) queremos que se vean los filtros
+        if (currentScrollPosition > (window.innerHeight)) {
 
-        // Comprueba si el usuario está haciendo scroll hacia abajo
-        if (currentScrollPosition > lastScrollPosition) {
-            // Si está haciendo scroll hacia abajo, oculta el elemento #filter-by-date-container
-            filterByDateContainer.classList.add('filter-hidden');
-            if (eventCardContainer) {
-                //console.log('Abajo: Hay event card container')
-                eventCardContainer.style.marginTop = '0px';
-                //console.log(eventCardContainer.style.marginTop)
-            }
-        } else {
-            // Si está haciendo scroll hacia arriba, muestra el elemento #filter-by-date-container
-            filterByDateContainer.classList.remove('filter-hidden');
-            if (eventCardContainer) {
-                //console.log('Arriba: Hay event card container')
-                eventCardContainer.style.marginTop = '76px';
-                //console.log(eventCardContainer)
+            // Comprueba si el usuario está haciendo scroll hacia abajo
+            if (currentScrollPosition > lastScrollPosition) {
+                // Si está haciendo scroll hacia abajo, oculta el elemento #filter-by-date-container
+                filterByDateContainer.classList.add('filter-hidden');
+                if (eventCardContainer) {
+                    eventCardContainer.style.marginTop = '0px';
+                }
+            } else {
+                // Si está haciendo scroll hacia arriba, muestra el elemento #filter-by-date-container
+                filterByDateContainer.classList.remove('filter-hidden');
+                if (eventCardContainer) {
+                    eventCardContainer.style.marginTop = '137px';
+                }
             }
         }
+ else {
+        // Si está haciendo scroll hacia arriba, muestra el elemento #filter-by-date-container
+        filterByDateContainer.classList.remove('filter-hidden');
+        if (eventCardContainer) {
+            eventCardContainer.style.marginTop = '137px';
+        }
+    }
 
         // Actualiza la última posición de desplazamiento con la posición actual
         lastScrollPosition = currentScrollPosition;
     });
 
-    flatpickr(fromDateInput, flatpickrConfig );
-    flatpickr(toDateInput, flatpickrConfig );
+    flatpickr(fromDateInput, flatpickrConfig);
+    flatpickr(toDateInput, flatpickrConfig);
 
     // Manejar evento click del botón de búsqueda
     searchButton.addEventListener('click', async () => {
         const fromDate = fromDateInput.value;
         const toDate = toDateInput.value;
         const eventsCardContainer = document.querySelector('.events-card-container');
-        getEventsList({fromDate, toDate}, eventsCardContainer)
+        getEventsList({ fromDate, toDate }, eventsCardContainer)
     });
 
     // Retornar el contenedor de filtros

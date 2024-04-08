@@ -4,12 +4,13 @@
     color: transparent;
     font-weight: bolder;
     padding: 0 1rem;
+    /*width: 100vw;*/
     opacity: 0.5;
     font-size: 2rem;
     cursor: pointer;
     transition: padding 100ms cubic-bezier(.67,0,1,.58),
-    opacity 300ms cubic-bezier(.67,0,1,.58),
-    color 300ms ease-in;
+      opacity 100ms cubic-bezier(.67,0,1,.58),
+      color 300ms ease-in;
   }
   #arrow-down-to-events:hover{
     padding-top: 0.5rem;

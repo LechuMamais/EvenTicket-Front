@@ -108,7 +108,7 @@ export function heroContainer() {
     // Las modificaciones al header las hacemos desde este component, porque queremnos que se hagan solo cuando haya header
     headerTitleModifier()
     window.addEventListener('scroll', scrollHandler);
-    createAnimatedArrowDownToEvents(heroContainer);
+    //createAnimatedArrowDownToEvents(heroContainer);
 
     return heroContainer;
 }
