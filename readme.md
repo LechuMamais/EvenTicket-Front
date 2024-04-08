@@ -27,6 +27,7 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
     |   |-- |-- showEventCard                    # Componente de tarjeta de evento
     |   |-- |-- updateEventForm                  # Componente de actualizar datos de un evento
     |   |-- global/                              # Componentes globales
+    |   |-- |-- createAnimatedArrowDownToEvents  # Componente de flecha que se posiciona sobre el hero, y al darle click scrollea hasta events
     |   |-- |-- createButton                     # Componente que muestra un nuevo boton. 
     |   |-- |-- footer                           # Componente que muestra el footer de la aplicación
     |   |-- |-- header                           # Componente del encabezado
@@ -62,7 +63,6 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
     |-- main.js                                  # Componente principal de la aplicación
     |-- index.html                               # Punto de entrada de la aplicación
 
-giveHeaderHomeTitleInitialStyles
 
 Funcionalidades Principales
 
