@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.1.4",
-    "rollup": "^4.14.1"
+    "rollup": "^4.14.1",
+    "vite": "^5.1.4"
   },
   "dependencies": {
     "flatpickr": "^4.6.13",
