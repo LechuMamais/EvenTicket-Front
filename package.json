@@ -12,7 +12,6 @@
     "@rollup/rollup-linux-x64-gnu": "4.6.1"
   },
   "devDependencies": {
-    "rollup": "^4.14.1",
     "vite": "^5.1.4"
   },
   "dependencies": {
