@@ -89,7 +89,7 @@ Correcciones de Santi:
     Para el efecto del titulo en el hero, voy a hacer una función en utils que se va a llamar despues de cargar un nuevo contenedor, y se va a ejecutar
     dependiendo de si se encuentra o no el heroContainer en el dom. En base a eso, es aplicaran unos estilos u otros. La vamos a llamar dentro de onClickHandler.
     
-    - Header: Cambiar el nombre del usuario por un logo
+    - Header:  Cambiar el nombre del usuario por un logo
 
 
     - Chequear la ubicación del footer, que quede siempre bien ubicado. Para eso tendremos que ver que pasa con la altura de homeContainer cuando

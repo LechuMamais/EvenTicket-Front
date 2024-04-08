@@ -1,3 +1,4 @@
+import { createAnimatedArrowDownToEvents } from '../createAnimatedArrowDownToEvents/createAnimatedArrowDownToEvents';
 import './heroContent.css';
 
 const headerInitialMarginCalculator = () => {
@@ -5,10 +6,6 @@ const headerInitialMarginCalculator = () => {
     const headerTitle = document.querySelector('#header-home-link-container');
     const viewportHeight = window.innerHeight;
     const headerTitleMarginTop = (viewportHeight * 0.5) - (headerTitle.clientHeight * 0.5) - (headerContainer.clientHeight * 0.5)/**/;
-    console.log('viewportHeight', viewportHeight);
-    console.log('headerTitle.clientHeight', headerTitle.clientHeight);
-    console.log('headerTitle', headerTitle)
-    //headerTitle.style.marginTop = `${headerTitleMarginTop}px`;
     return headerTitleMarginTop
 }
 
@@ -17,17 +14,15 @@ const headerMarginScrollModifier = (scrollTop) => {
     const parallaxFactor = 0.5; // Modificador del scrollTop Position
     const headerTitleContainer = document.querySelector('#header-home-link-container');
     const headerTitlePrevMarginTop = headerInitialMarginCalculator();
-    console.log('headerTitlePrevMarginTop', headerTitlePrevMarginTop);
     const translateY = scrollTop * parallaxFactor;
     const headerTitleContainerMarginTop = Math.max(headerTitlePrevMarginTop - translateY, 0);
     headerTitleContainer.style.marginTop = `${headerTitleContainerMarginTop}px`;
-    console.log('headerTitleContainerMarginTop', headerTitleContainerMarginTop);
 }
 
 const maxTitleSizeCalculator = () => {
     const viewportWidth = window.innerWidth;
-    const sizeCorrectorParam = 1/7;
-    const maxTitleSize = viewportWidth*sizeCorrectorParam;
+    const sizeCorrectorParam = 1 / 7;
+    const maxTitleSize = viewportWidth * sizeCorrectorParam;
     return maxTitleSize;
 }
 
@@ -36,7 +31,6 @@ const headerFontSizeScrollModifier = (scrollTop) => {
     // Cuando scrollTop sea viewportHeigth-headerHeight, que fontSize sea 20px
     const headerTitle = document.querySelector('#header-home-link-container a');
     const maxTitleSize = maxTitleSizeCalculator();
-    console.log('maxTitleSize',maxTitleSize)
     const minTitleSize = 20;
     const headerContainer = document.querySelector('header')
     const headerHeight = headerContainer.clientHeight
@@ -63,13 +57,11 @@ const headerBackgroundSetter = (scrollTop, heroContainer) => {
 
     if (scrollTop > (heroHeight - headerHeight)) {
         //En este caso, le agregamos el fondo al header
-        //console.log('agregamos background al header')
         headerContainer.style.backgroundImage = `url('/background-hero.jpg')`; // Le damos fondo al header
         headerContainer.style.backgroundPositionY = 'bottom';
     }
     if (scrollTop <= (heroHeight - headerHeight)) {
         //En este caso, le quitamos el background al header
-        //console.log('El header tiene el hero debajo')
         headerContainer.style.backgroundImage = ''; // Vacía el fondo del header
     }
 }
@@ -80,30 +72,26 @@ const scrollHandler = () => {
     if (!heroContainer) { return }
     const scrollTop = window.scrollY;
     // Funciones que modifican el Header:
-    headerFontSizeScrollModifier(scrollTop);    // fontSize
-    headerMarginScrollModifier(scrollTop);      // marginTop
-    headerBackgroundSetter(scrollTop, heroContainer)           // background
-
+    headerFontSizeScrollModifier(scrollTop);            // fontSize
+    headerMarginScrollModifier(scrollTop);              // marginTop
+    headerBackgroundSetter(scrollTop, heroContainer)    // background
 }
 
 export const headerTitleModifier = () => {
     const scrollTop = window.scrollY;
-    console.log(scrollTop)
-
     headerFontSizeScrollModifier(scrollTop);
     headerMarginScrollModifier(scrollTop);
-
 };
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 export function heroContainer() {
-    // Crear contenedor principal del héroe
+    // Creamos el contenedor principal del héroe
     const heroContainer = document.createElement('div');
     heroContainer.classList.add('hero-container');
 
-    // Crear héroe con imagen de fondo
+    // Creamos el héroe con imagen de fondo
     const hero = document.createElement('div');
     hero.classList.add('hero');
     heroContainer.appendChild(hero);
@@ -114,12 +102,13 @@ export function heroContainer() {
     heroContainer.style.height = `${initialHeight}px`;
     // Y el marginTop, que es -la altaura del header
     const header = document.querySelector('header');
-    //console.log(`-${(header.offsetHeight)}px`)
+
     heroContainer.style.marginTop = `-${(header.offsetHeight)}px`;
 
+    // Las modificaciones al header las hacemos desde este component, porque queremnos que se hagan solo cuando haya header
     headerTitleModifier()
-
     window.addEventListener('scroll', scrollHandler);
+    createAnimatedArrowDownToEvents(heroContainer);
 
     return heroContainer;
 }

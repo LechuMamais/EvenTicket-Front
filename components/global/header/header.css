@@ -47,7 +47,7 @@ header {
     justify-content: center;
 }
 
-.right-header-link{
+.right-header-link {
     position: fixed;
     top: 1rem;
     right: 5vw;
@@ -55,11 +55,22 @@ header {
 
 
 /*------------------------------------------------------------------------------------------------------------*/
-
-#header-empty-link-container a {
-    color: rgba(0, 128, 0, 0) !important;
+#header-profile-link-container {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid transparent !important;
+    transition: all 100ms linear;
 }
 
-#header-empty-link-container {
-    cursor: unset;
+#header-profile-link-container a {
+    margin-top: -1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#header-profile-link-container:hover {
+    border: 2px solid var(--color-dark) !important;
+    scale: 1.03;
 }

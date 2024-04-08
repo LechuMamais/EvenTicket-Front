@@ -1,3 +1,4 @@
+import { giveArrowLeftMargin } from "../components/global/createAnimatedArrowDownToEvents/createAnimatedArrowDownToEvents";
 import { heroContainer } from "../components/global/heroContent/heroContent";
 
 // En el caso en que el usuario modifique manualmente el tamaño del viewport,
@@ -9,12 +10,15 @@ function actualizarComponenteHero() {
         // Para que se actualice correctamente, lo quitamos con remove y lo volvemos a cargar
         heroContainerDom.remove;
         heroContainer();
-
+        // Ahora actualizamos la createAnimatedArrowDownToEvents()
+        const arrowDownToEvents = document.querySelector('#arrow-down-to-events')
+        giveArrowLeftMargin(arrowDownToEvents)
     }
 }
 
 
-export function resizeDomActualization(){
+
+export function resizeDomActualization() {
     actualizarComponenteHero();
 
 }
