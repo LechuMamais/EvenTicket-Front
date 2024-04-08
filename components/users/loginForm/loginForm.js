@@ -4,6 +4,7 @@ import { createRegistrationForm } from "../registrationForm/registrationForm"; /
 import "./loginForm.css";
 
 export const createLoginForm = (userName = '') => {
+    window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     localStorage.clear();
     const form = document.createElement("form");
     form.id = "login-form";

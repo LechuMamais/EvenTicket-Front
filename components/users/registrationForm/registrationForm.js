@@ -3,6 +3,7 @@ import { register } from "../../../utils/users/register";
 import "./registrationForm.css";
 
 export const createRegistrationForm = () => {
+    window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     const form = document.createElement("form");
     form.id = "registration-form";
     form.innerHTML = `
