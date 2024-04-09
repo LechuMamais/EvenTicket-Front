@@ -1,3 +1,4 @@
+import { onClickHandler } from "../../../utils/onClickHandler";
 import { showEventDetails } from "../eventDetails/eventDetails";
 import "./showEventCard.css";
 
@@ -22,7 +23,8 @@ export const showEventCard = (event) => {
         // Obtener el ID del evento al hacer clic en cualquier parte de la card
         const eventId = event.currentTarget.getAttribute('data-event-id');
         // Redireccionar a la página de detalles del evento con el ID obtenido
-        showEventDetails(eventId);
+        //showEventDetails(eventId);
+        onClickHandler('#main-container', async ()=> {showEventDetails(eventId)})
     });
 
     //                      PARALLAX                   //
