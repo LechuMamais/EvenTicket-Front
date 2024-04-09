@@ -1,11 +1,4 @@
-#auth-required{
-    height: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
+
 
 .event-details-container{
     padding: 2.5rem 1rem;
@@ -21,10 +14,5 @@
     background-color: var(--color-white);
     position: relative;
     overflow: hidden;
-}
-
-#auth-required>h4,
-#auth-required>p{
-    cursor: pointer;
 }
 

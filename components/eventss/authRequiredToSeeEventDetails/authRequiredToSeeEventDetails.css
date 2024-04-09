@@ -1,0 +1,18 @@
+#auth-required{
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+#auth-required>h4,
+#auth-required>p{
+    cursor: pointer;
+}
+
+#auth-required>p{
+    font-size: 14px;
+}
+

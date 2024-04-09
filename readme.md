@@ -19,6 +19,7 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
 
     |-- components/                              # Componentes reutilizables
     |   |-- eventss/                             # Componentes relacionados a la gestion de eventos
+    |   |-- |-- authRequiredToSeeEventDetails    # Componente que muestra links de login y register
     |   |-- |-- createEventHero                  # Componente de Imagen y titulo principal de la pagina de un evento
     |   |-- |-- createUsersList                  # Componente de lista en fila
     |   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
@@ -137,6 +138,9 @@ createEventHero
 
 createUsersList
     Muestra una lista de usuarios. Se utilizará en los detalles de evento, para mostrar organizadores y asistentes
+
+authRequiredToSeeEventDetails
+    Muestra en formato de texto, dos botones, para ir al login y al register
 
 eventDetailsButtonsContainer
     Muestra todos los botones con los que un usuario puede interactuar con un evento en particular, dependiendo de si está autenticado, si es el 
