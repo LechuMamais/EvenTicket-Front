@@ -19,6 +19,7 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
 
     |-- components/                              # Componentes reutilizables
     |   |-- eventss/                             # Componentes relacionados a la gestion de eventos
+    |   |-- |-- createEventHero                  # Componente de Imagen y titulo principal de la pagina de un evento
     |   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
     |   |-- |-- eventDetails.js                  # Componente del detalles de un evento
     |   |-- |-- eventForm                        # Componente que muestra un formulario para crear o actualizar la informacion de un evento
@@ -128,6 +129,9 @@ EventCard
 
 showEventDetails
     Muestra los detalles de un evento en particular. Incluye un botón para confirmar asistencia, o cancelar asistencia al evento.
+
+createEventHero
+    Muestra la imagen del evento y su título por encima. Incluye un efecto parallax
 
 createNewEventForm
     Muestra un formulario para crear un nuevo evento.
