@@ -1,0 +1,18 @@
+.item{
+    text-align: center;
+    cursor: pointer;
+ }
+
+.list-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.users-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
