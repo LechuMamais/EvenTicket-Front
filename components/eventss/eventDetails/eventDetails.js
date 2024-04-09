@@ -11,69 +11,130 @@ import { confirmAssistance } from "../../../utils/events/confirmAssistance";
 import { cancelAssistance } from "../../../utils/events/cancelAssistance";
 import "./eventDetails.css";
 
+
+const createEventHero = (eventData) => {
+    // Especie de Hero del evento, con el elemento que contiene el titulo, y la imagen de fondo
+    const imageElementContainer = document.createElement("div");
+    imageElementContainer.classList.add('image-element-container');
+    const backgroundImage = `url('${eventData.event.img}')`;
+    imageElementContainer.style.backgroundImage = backgroundImage;
+
+    // Este Hero va a tener un efecto Parallax:
+    window.addEventListener('scroll', function () {
+        const scrollTop = window.scrollY;
+        const parallaxFactor = 0.5; // Factor de parallax 
+        // Calculamos la nueva posición vertical de la imagen
+        const translateY = scrollTop * parallaxFactor;
+        // Y aplica la transformación CSS a la imagen
+        imageElementContainer.style.transform = `translateY(${translateY}px)`;
+    });
+
+    const titleElement = document.createElement('h2');
+    titleElement.textContent = eventData.event.title;
+    imageElementContainer.appendChild(titleElement);
+    return imageElementContainer;
+}
+
+const authRequiredToSeeEventDetails = () => {
+    const authRequired = document.createElement('div');
+    authRequired.id = 'auth-required';
+    const authRequiredH4 = document.createElement('h4');
+    authRequiredH4.textContent = 'Inicia sesión para ver los detalles del evento';
+    const authRequiredP = document.createElement('p');
+    authRequiredP.textContent = '¿No estás registrado? Hazlo aqui';
+    authRequiredH4.addEventListener('click', () => {
+        onClickHandler('#main-container', () => createLoginForm(''))
+    })
+    authRequiredP.addEventListener('click', () => {
+        onClickHandler('#main-container', () => createRegistrationForm(''))
+    })
+
+    authRequired.appendChild(authRequiredH4);
+    authRequired.appendChild(authRequiredP);
+    return authRequired;
+}
+
+// Función para crear una lista de elementos (organizadores o asistentes)
+const createList = (container, title, items, clickHandler, ul_id) => {
+    const listContainer = document.createElement('div');
+    listContainer.classList.add('list-container');
+
+    const listTitle = document.createElement('h3');
+    listTitle.textContent = title;
+    listContainer.appendChild(listTitle);
+
+    const itemList = document.createElement('ul');
+    itemList.classList.add('users-list');
+    itemList.id = `${ul_id}`
+
+    if (items.length === 0) {
+        const emptyItem = document.createElement('li');
+        emptyItem.innerHTML = `<h4>Aún no hay ${title.toLowerCase()}</h4>`;
+        itemList.appendChild(emptyItem);
+    } else {
+        items.forEach((item) => {
+            const itemElement = document.createElement('li');
+            const itemContent = document.createElement('p');
+            itemContent.textContent = `${item.userName}`;
+            itemContent.classList.add('item');
+            itemContent.addEventListener('click', () => {
+                clickHandler(item._id);
+            });
+            itemElement.appendChild(itemContent);
+            itemList.appendChild(itemElement);
+        });
+    }
+
+    listContainer.appendChild(itemList);
+    container.appendChild(listContainer);
+};
+
+// Mostrar organizadores
+const showOrganizers = (eventDetailsContainer, eventData) => {
+    const organizers = eventData.organizers || [];
+    createList(
+        eventDetailsContainer,
+        'Organizadores',
+        organizers,
+        async (organizerId) => await createProfile(organizerId),
+        'organizers-list'
+    );
+};
+
+// Mostrar asistentes
+const showAttendees = (eventDetailsContainer, eventData) => {
+    const attendees = eventData.attendees || [];
+    createList(
+        eventDetailsContainer,
+        `Asistentes: ${attendees.length}`,
+        attendees,
+        async (attendeeId) => await createProfile(attendeeId),
+        'attendees-list'
+    );
+};
+
 export const showEventDetails = async (eventId) => {
     window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     const mainContainer = document.querySelector('#main-container');
 
     try {
         // Obtener los detalles del evento desde la API
-        const response = await makeRequest(`${EVENTS_URL}/${eventId}`, 'GET');
+        const eventData = await makeRequest(`${EVENTS_URL}/${eventId}`, 'GET');
 
-        if (!response) {
+        if (!eventData) {
             throw new Error('Error al obtener los detalles del evento');
         }
-        const eventData = response
 
-        // Obtener la información del usuario
+        // Obtener la información del usuario del localStorage
         const userId = localStorage.getItem("userId");
         const accessToken = localStorage.getItem("accessToken");
         const isAuthenticated = userId && accessToken;
 
-        // Especie de Hero del evento, con el elemento que contiene el titulo, y la imagen de fondo
-        const imageElementContainer = document.createElement("div");
-        imageElementContainer.classList.add('image-element-container');
-        const backgroundImage = `url('${eventData.event.img}')`;
-        imageElementContainer.style.backgroundImage = backgroundImage;
-
-        // Este Hero va a tener un efecto Parallax:
-        window.addEventListener('scroll', function () {
-            const scrollTop = window.scrollY;
-            const parallaxFactor = 0.5; // Factor de parallax 
-
-            // Calculamos la nueva posición vertical de la imagen
-            const translateY = scrollTop * parallaxFactor;
-
-            // Y aplica la transformación CSS a la imagen
-            imageElementContainer.style.transform = `translateY(${translateY}px)`;
-        });
-
-        const titleElement = document.createElement('h2');
-        titleElement.textContent = eventData.event.title;
-        imageElementContainer.appendChild(titleElement);
-
-        mainContainer.appendChild(imageElementContainer);
+        mainContainer.appendChild(createEventHero(eventData));
 
         // Si el usuario no está autenticado, no le dejaremos ver los detalles del evento
         if (!isAuthenticated) {
-            const authRequired = document.createElement('div');
-            authRequired.id = 'auth-required';
-            const authRequiredH4 = document.createElement('h4');
-            authRequiredH4.textContent = 'Inicia sesión para ver los detalles del evento';
-            const authRequiredP = document.createElement('p');
-            authRequiredP.textContent = '¿No estás registrado? Hazlo aqui';
-            authRequiredH4.addEventListener('click', () => {
-                onClickHandler('#main-container', () => createLoginForm(''))
-            })
-            authRequiredP.addEventListener('click', () => {
-                onClickHandler('#main-container', () => createRegistrationForm(''))
-            })
-
-            authRequired.appendChild(authRequiredH4);
-            authRequired.appendChild(authRequiredP);
-
-            //mainContainer.appendChild(imageElementContainer);
-            mainContainer.appendChild(authRequired);
-
+            mainContainer.appendChild(authRequiredToSeeEventDetails());
         } else if (isAuthenticated) {
             // Si el usuario está autenticado, entonces que sí pueda ver los detalles del evento
 
@@ -108,7 +169,7 @@ export const showEventDetails = async (eventId) => {
             descriptionElement.textContent = `Descripción: ${eventData.event.description}`;
 
 
-            // Mostrar los nombres de los organizadores del evento:
+            /*// Mostrar los nombres de los organizadores del evento:
             const organizers = eventData.organizers;
             const organizersList = document.createElement('ul');
             organizers.forEach((organizer) => {
@@ -117,7 +178,6 @@ export const showEventDetails = async (eventId) => {
                 organizerElement.textContent = `${organizer.userName}`;
                 organizerElement.classList.add('organizer');
                 const handleProfileClick = async () => {
-                    // Llama a createProfile solo cuando se hace clic en el elemento
                     await createProfile(organizer._id);
                 };
                 organizerElement.addEventListener('click', () => {
@@ -146,15 +206,11 @@ export const showEventDetails = async (eventId) => {
                     attendeeElement.textContent = `${attendee.userName}`;
                     attendeeElement.classList.add('attendee');
                     const handleProfileClick = async () => {
-                        // Llama a createProfile solo cuando se hace clic en el elemento
                         await createProfile(attendee._id);
                     };
                     attendeeElement.addEventListener('click', () => {
                         onClickHandler('#main-container', handleProfileClick);
                     });
-                    /*attendeeElement.addEventListener('click', async () => {
-                        createProfile(attendee._id)
-                    })*/
                     attendeeListElement.appendChild(attendeeElement)
                     attendeesList.appendChild(attendeeListElement)
                 });
@@ -163,7 +219,9 @@ export const showEventDetails = async (eventId) => {
             const attendeesText = document.createElement('h3');
             attendeesText.textContent = `Asistentes: ${attendees.length}`;
             eventDetailsContainer.appendChild(attendeesText);
-            eventDetailsContainer.appendChild(attendeesList);
+            eventDetailsContainer.appendChild(attendeesList);*/
+            showOrganizers(eventDetailsContainer, eventData);
+            showAttendees(eventDetailsContainer, eventData);
 
             // Agregar elementos al contenedor de detalles del evento
             eventDetailsContainer.appendChild(dateElement);
