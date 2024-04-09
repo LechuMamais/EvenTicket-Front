@@ -145,9 +145,16 @@ export const showEventDetails = async (eventId) => {
                     const attendeeElement = document.createElement('p');
                     attendeeElement.textContent = `${attendee.userName}`;
                     attendeeElement.classList.add('attendee');
-                    attendeeElement.addEventListener('click', async () => {
+                    const handleProfileClick = async () => {
+                        // Llama a createProfile solo cuando se hace clic en el elemento
+                        await createProfile(attendee._id);
+                    };
+                    attendeeElement.addEventListener('click', () => {
+                        onClickHandler('#main-container', handleProfileClick);
+                    });
+                    /*attendeeElement.addEventListener('click', async () => {
                         createProfile(attendee._id)
-                    })
+                    })*/
                     attendeeListElement.appendChild(attendeeElement)
                     attendeesList.appendChild(attendeeListElement)
                 });
