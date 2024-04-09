@@ -16,8 +16,8 @@ export const createProfile = async (profileId = '') => {
     window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     const userId = localStorage.getItem("userId");
     const mainContainer = document.querySelector("#main-container");
+    mainContainer.innerHTML = "";
     if (userId == null) {
-        mainContainer.innerHTML = "";
         mainContainer.appendChild(createLoginForm());
         return
     }
@@ -140,18 +140,8 @@ export const createProfile = async (profileId = '') => {
         profileContainer.appendChild(UserInfo(userData));
 
         //Finalmente mostrar en mainContainer el perfil del usuario
-        mainContainer.innerHTML = "";
         mainContainer.appendChild(profileContainer);
 
-        // Que cada eventCard, al darle click, lleve a su eventDetails component 
-        const eventButtons = document.querySelectorAll(".event-card");
-        eventButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                const eventId = button.dataset.eventId;
-                mainContainer.innerHTML = "";
-                showEventDetails(eventId);
-            });
-        });
     } catch (error) {
         console.error("Error al obtener la información del usuario:", error.message);
         showNotification("Error al mostrar el perfil del usuario", "error");

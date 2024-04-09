@@ -13,6 +13,7 @@ import "./eventDetails.css";
 
 export const showEventDetails = async (eventId) => {
     window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
+    const mainContainer = document.querySelector('#main-container');
 
     try {
         // Obtener los detalles del evento desde la API
@@ -50,7 +51,6 @@ export const showEventDetails = async (eventId) => {
         titleElement.textContent = eventData.event.title;
         imageElementContainer.appendChild(titleElement);
 
-        const mainContainer = document.querySelector('#main-container');
         mainContainer.appendChild(imageElementContainer);
 
         // Si el usuario no está autenticado, no le dejaremos ver los detalles del evento
@@ -71,8 +71,7 @@ export const showEventDetails = async (eventId) => {
             authRequired.appendChild(authRequiredH4);
             authRequired.appendChild(authRequiredP);
 
-            mainContainer.innerHTML = "";
-            mainContainer.appendChild(imageElementContainer);
+            //mainContainer.appendChild(imageElementContainer);
             mainContainer.appendChild(authRequired);
 
         } else if (isAuthenticated) {
@@ -117,9 +116,13 @@ export const showEventDetails = async (eventId) => {
                 const organizerElement = document.createElement('p');
                 organizerElement.textContent = `${organizer.userName}`;
                 organizerElement.classList.add('organizer');
-                organizerElement.addEventListener('click', async () => {
-                    createProfile(organizer._id)
-                })
+                const handleProfileClick = async () => {
+                    // Llama a createProfile solo cuando se hace clic en el elemento
+                    await createProfile(organizer._id);
+                };
+                organizerElement.addEventListener('click', () => {
+                    onClickHandler('#main-container', handleProfileClick);
+                });
                 organizerListElement.appendChild(organizerElement)
                 organizersList.appendChild(organizerListElement)
             });
@@ -161,9 +164,7 @@ export const showEventDetails = async (eventId) => {
             eventDetailsContainer.appendChild(descriptionElement);
 
             // Agregar el contenedor de titulo e imagen, y el de detalles al contenedor principal
-            const mainContainer = document.querySelector('#main-container');
-            mainContainer.innerHTML = "";
-            mainContainer.appendChild(imageElementContainer);
+
             mainContainer.appendChild(eventDetailsContainer);
 
             // Verificar si el usuario es organizdor del evento
