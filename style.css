@@ -72,24 +72,12 @@ body{
   .event-card{
     height: 200px !important;
   }
-  .event-card > h3{
-    font-size: 60px !important;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .event-card > h3{
-    font-size: 50px !important;
-  }
 }
 
 @media screen and (max-width: 450px) {
   .event-card{
     height: 160px !important;
     max-width: 100vw !important;
-  }
-  .event-card > h3{
-    font-size: 40px !important;
   }
   .user-events-container h2{
     font-size: 19px !important;

@@ -4,14 +4,9 @@ import { createProfile } from "../../users/profile/profile";
 import { home } from "../home/home";
 import { onClickHandler } from '../../../utils/onClickHandler';
 import { createAnimatedArrowDownToEvents } from '../createAnimatedArrowDownToEvents/createAnimatedArrowDownToEvents';
-//import { showEvents } from "../../eventss/events/events";
-
-
 
 export const createHeader = () => {
     const isAuthenticated = localStorage.getItem("userId") && localStorage.getItem("accessToken");
-    const userName = localStorage.getItem("userName");
-
     const header = document.createElement("header");
     header.innerHTML = `
         <ul id="header-list">

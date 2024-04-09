@@ -46,6 +46,10 @@ header {
     justify-content: center;
 }
 
+#header-home-link-container  a {
+    padding: 0  2rem; /*Para facilitar su click*/
+}
+
 .right-header-link {
     position: fixed;
     top: 1rem;

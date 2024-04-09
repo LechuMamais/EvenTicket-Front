@@ -63,10 +63,6 @@ Mejoras hechas:
 
 - Header:  Cambiar el nombre del usuario por un logo
 
-
---------------------------------------------------------------------------------
-
-Próximas mejoras:
 Correcciones de Santi:
     Hechas:
     - Quitar el register del Header
@@ -87,12 +83,14 @@ Correcciones de Santi:
         Search Filters: done
         Event card: done
         Header: done
-        Profile: Ajustar tamaños de elementos
-    
-
+        Profile: done
 
     - Chequear la ubicación del footer, que quede siempre bien ubicado. Para eso tendremos que ver que pasa con la altura de homeContainer cuando
-        se hace scroll. Se achica el hero, y sube todo el resto del contenido, entonces que da espacio en blanco debajo del footer.
+        se hace scroll. Se achica el hero, y sube todo el resto del contenido, entonces que da espacio en blanco debajo del footer. done
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Próximas mejoras:
 
 
 - Hacer un calendario de eventos a los que el usuario va como asistente.
@@ -104,7 +102,7 @@ Correcciones de Santi:
 - Cuentas de usuarios, cuentas de organizadores, cuentas de administradores.
 
 
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
 Mejoras Futuras:
 
