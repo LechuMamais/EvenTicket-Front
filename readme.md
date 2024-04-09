@@ -22,7 +22,8 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
     |   |-- |-- createEventHero                  # Componente de Imagen y titulo principal de la pagina de un evento
     |   |-- |-- createUsersList                  # Componente de lista en fila
     |   |-- |-- createNewEventForm               # Componente de formulario de crear nuevo evento
-    |   |-- |-- eventDetails.js                  # Componente del detalles de un evento
+    |   |-- |-- eventDetails                     # Componente del detalles de un evento
+    |   |-- |-- eventDetailsButtonsContainer     # Componente que muestra todos los botones con los que interactuar con un evento en particular
     |   |-- |-- eventForm                        # Componente que muestra un formulario para crear o actualizar la informacion de un evento
     |   |-- |-- events                           # Componente que muestra la lista de eventos y filtros de busqueda
     |   |-- |-- searchEventsFiltersContainer     # Componente de filtros de busqueda
@@ -136,6 +137,10 @@ createEventHero
 
 createUsersList
     Muestra una lista de usuarios. Se utilizará en los detalles de evento, para mostrar organizadores y asistentes
+
+eventDetailsButtonsContainer
+    Muestra todos los botones con los que un usuario puede interactuar con un evento en particular, dependiendo de si está autenticado, si es el 
+    organizador o si ya es asistente o no.
 
 createNewEventForm
     Muestra un formulario para crear un nuevo evento.

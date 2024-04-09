@@ -3,19 +3,15 @@ import { EVENTS_URL } from "../../../utils/apiUrls";
 import { createLoginForm } from "../../users/loginForm/loginForm";
 import { createProfile } from "../../users/profile/profile";
 import { createRegistrationForm } from "../../users/registrationForm/registrationForm";
-import { updateEventForm } from "../updateEventForm/updateEventForm";
 import { makeRequest } from "../../../utils/api";
-import { createButton } from "../../global/createButton/createButton";
 import { onClickHandler } from "../../../utils/onClickHandler";
-import { deleteEvent } from "../../../utils/events/deleteEvent";
-import { confirmAssistance } from "../../../utils/events/confirmAssistance";
-import { cancelAssistance } from "../../../utils/events/cancelAssistance";
 import { dateElement } from "../../../utils/dateElementConfig";
 import { createEventHero } from "../createEventHero/createEventHero";
 import { createUsersList } from "../createUsersList/createUsersList";
+import { eventDetailsButtonsContainer } from "../eventDetailsButtonsContainer/eventDetailsButtonsContainer";
 
-
-
+//Componente que muestra todos los detalles de un evento. Dependiendo de si el user está autenticado, 
+// es organizer o es asistente, mostrará unas cosas u otras
 const authRequiredToSeeEventDetails = () => {
     const authRequired = document.createElement('div');
     authRequired.id = 'auth-required';
@@ -104,55 +100,15 @@ export const showEventDetails = async (eventId) => {
             eventDetailsContainer.appendChild(locationElement);
             eventDetailsContainer.appendChild(descriptionElement);
 
+            
+            eventDetailsContainer.appendChild(eventDetailsButtonsContainer(eventData, eventId, userId));
+            
             // Agregar el contenedor de titulo e imagen, y el de detalles al contenedor principal
-
+        
             mainContainer.appendChild(eventDetailsContainer);
-
-            // Verificar si el usuario es organizdor del evento
-            const isOrganizer = eventData.event.createdBy === userId;
-
-            if (isOrganizer) {
-                // Si es organizador del evento, mostraremos un boton para actualizar el evento, y otro para eliminar el evento
-
-                // Componente createButton que nos lleva a formulario para eliminar el evento, ya rellenado con los datos actuales del evento
-                const updateButton = createButton("Actualizar evento", () => {
-                    onClickHandler('.event-details-container', () => updateEventForm(event.target.dataset.eventId, eventData.event))
-                },
-                    { id: "update-event-button", class: "button-primary" });
-                updateButton.dataset.eventId = eventId; // Almacenar el eventId como un atributo de datos
-                eventDetailsContainer.appendChild(updateButton);
-
-                // Llamamos al componente createButton y le pasamos la funcion que elimina evento, que importamos de utils
-                const deleteEventButton = createButton("Eliminar evento", async () => { deleteEvent(eventId) }, { id: "delete-event-button", class: "button-delete" });
-                eventDetailsContainer.appendChild(deleteEventButton);
-            }
-
-            // Si no es organizador, que pueda inscribirse al evento
-            if (!isOrganizer) {
-                // Verificar si el usuario está en la lista de asistentes al evento:
-                // contrastamos la lista de asistentes con el id del usuario, que está en localStorage
-                const isAttendee = eventData.attendees.some(user => user._id === userId);
-
-                // Si no está inscripto en el evento, mostramos un boton para que pueda inscribirse
-                if (isAuthenticated && !isAttendee) {
-                    // Llamamos al componente createButton y le pasamos la funcion que confirma asistencia a evento
-                    const confirmAssistanceButton = createButton("Asistir", async () => { confirmAssistance(userId, eventId) }, { id: "confirm-assistance-button", class: "button-primary" });
-                    eventDetailsContainer.appendChild(confirmAssistanceButton);
-
-                } else if (isAuthenticated && isAttendee) {
-                    // Si ya está inscripto en el evento, lo indicamos en un span y mostramos un boton para que pueda inscribirse
-                    const alreadyAttendeeSpan = document.createElement("span");
-                    alreadyAttendeeSpan.textContent = "Ya eres asistente!";
-                    eventDetailsContainer.appendChild(alreadyAttendeeSpan);
-
-                    // Llamamos al componente createButton y le pasamos la funcion que cancela asistencia a evento que importamos de utils/events
-                    const cancelAttendButton = createButton("Cancelar Asistencia", async () => { cancelAssistance(userId, eventId) }, { id: "cancel-assistance-button", class: "button-primary" });
-                    eventDetailsContainer.appendChild(cancelAttendButton);
-                }
-            }
         }
         return mainContainer;
-
+        
     } catch (error) {
         console.error('Error al mostrar los detalles del evento:', error.message);
     }
