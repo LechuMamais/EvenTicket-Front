@@ -1,5 +1,4 @@
 import './eventDetailsButtonsContainer.css'
-
 import { updateEventForm } from "../updateEventForm/updateEventForm";
 import { createButton } from "../../global/createButton/createButton";
 import { deleteEvent } from "../../../utils/events/deleteEvent";
@@ -37,12 +36,12 @@ export const eventDetailsButtonsContainer = (eventData, eventId, userId) => {
         const isAttendee = eventData.attendees.some(user => user._id === userId);
 
         // Si no está inscripto en el evento, mostramos un boton para que pueda inscribirse
-        if (isAuthenticated && !isAttendee) {
+        if (!isAttendee) {
             // Llamamos al componente createButton y le pasamos la funcion que confirma asistencia a evento
             const confirmAssistanceButton = createButton("Asistir", async () => { confirmAssistance(userId, eventId) }, { id: "confirm-assistance-button", class: "button-primary" });
             eventDetailsButtonsContainer.appendChild(confirmAssistanceButton);
 
-        } else if (isAuthenticated && isAttendee) {
+        } else if (isAttendee) {
             // Si ya está inscripto en el evento, lo indicamos en un span y mostramos un boton para que pueda inscribirse
             const alreadyAttendeeSpan = document.createElement("span");
             alreadyAttendeeSpan.textContent = "Ya eres asistente!";
