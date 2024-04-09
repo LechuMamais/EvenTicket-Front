@@ -56,6 +56,7 @@ El frontend sigue una arquitectura de aplicación de una sola página (SPA) util
     |   |-- |-- updateProfile                    # Funcion para actualizar los datos de un usuario
     |   |-- api.js                               # Funcion para hacer peticiones a la API
     |   |-- apiUrls.js                           # Aquí se almacenan las urls donde se harán las peticiones
+    |   |-- dateElementConfig.js                 # Configura y crea elemento Date
     |   |-- flatpickrConfig.js                   # Aquí se almacenan un objeto con las configuraciones de flatpickr, libreria para manejar la visualizacion de fechas
     |   |-- giveHeaderHomeTitleInitialStyles.js  # Funcion para darle al header los estilos necesarios al cargarse un nuevo component. Si se carga la home, le dara estilos especiales para generar el efecto que buscamos. Se llama desde onClickHandler
     |   |-- onClickHandler.js                    # Función para manejar eventos de clic comunes, donde se quita un componente y se muestra otro

@@ -10,6 +10,7 @@ import { deleteEvent } from "../../../utils/events/deleteEvent";
 import { confirmAssistance } from "../../../utils/events/confirmAssistance";
 import { cancelAssistance } from "../../../utils/events/cancelAssistance";
 import "./eventDetails.css";
+import { dateElement } from "../../../utils/dateElementConfig";
 
 
 const createEventHero = (eventData) => {
@@ -113,6 +114,7 @@ const showAttendees = (eventDetailsContainer, eventData) => {
     );
 };
 
+
 export const showEventDetails = async (eventId) => {
     window.scrollTo({ top: 0 }); // Asegurarnos de que el scroll esté arriba del todo en la pag
     const mainContainer = document.querySelector('#main-container');
@@ -135,32 +137,16 @@ export const showEventDetails = async (eventId) => {
         // Si el usuario no está autenticado, no le dejaremos ver los detalles del evento
         if (!isAuthenticated) {
             mainContainer.appendChild(authRequiredToSeeEventDetails());
-        } else if (isAuthenticated) {
+        } else {
             // Si el usuario está autenticado, entonces que sí pueda ver los detalles del evento
 
             // Crear elementos HTML para mostrar los detalles del evento
             const eventDetailsContainer = document.createElement('div');
             eventDetailsContainer.classList.add('event-details-container');
 
-            // Para mostrar la fecha y hora, hay que formatearla un poco. Podría utilizar moment.js,
-            // pero he decidido utilizar Intl.DateTimeFormat que es de javascript nativo.
-            const eventDate = eventData.event.date;
-            const formattedDate = new Date(eventDate);
-
-            const options = {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                timeZone: 'UTC'
-            };
-
-            const formattedDateString = new Intl.DateTimeFormat('es-ES', options).format(formattedDate);
-            const dateElement = document.createElement('p');
-            dateElement.textContent = `Fecha: ${formattedDateString}`;
+            // Funciones que muestran organizadores y asistentes:
+            showOrganizers(eventDetailsContainer, eventData);
+            showAttendees(eventDetailsContainer, eventData);
 
             const locationElement = document.createElement('p');
             locationElement.textContent = `Ubicación: ${eventData.event.location}`;
@@ -168,63 +154,8 @@ export const showEventDetails = async (eventId) => {
             const descriptionElement = document.createElement('p');
             descriptionElement.textContent = `Descripción: ${eventData.event.description}`;
 
-
-            /*// Mostrar los nombres de los organizadores del evento:
-            const organizers = eventData.organizers;
-            const organizersList = document.createElement('ul');
-            organizers.forEach((organizer) => {
-                const organizerListElement = document.createElement('li');
-                const organizerElement = document.createElement('p');
-                organizerElement.textContent = `${organizer.userName}`;
-                organizerElement.classList.add('organizer');
-                const handleProfileClick = async () => {
-                    await createProfile(organizer._id);
-                };
-                organizerElement.addEventListener('click', () => {
-                    onClickHandler('#main-container', handleProfileClick);
-                });
-                organizerListElement.appendChild(organizerElement)
-                organizersList.appendChild(organizerListElement)
-            });
-
-            const organizersText = document.createElement('h3');
-            organizersText.textContent = 'Organizadores: ';
-            eventDetailsContainer.appendChild(organizersText);
-            eventDetailsContainer.appendChild(organizersList);
-
-            // Mostrar los nombres de los asistentes al evento:
-            const attendees = eventData.attendees || [];
-            const attendeesList = document.createElement('ul');
-            if (attendees.length === 0) {
-                const attendeeListElement = document.createElement('li');
-                attendeeListElement.innerHTML = `<h4>Aún no hay asistentes a este evento</h4>`;
-                attendeesList.appendChild(attendeeListElement)
-            } else {
-                attendees.forEach((attendee) => {
-                    const attendeeListElement = document.createElement('li');
-                    const attendeeElement = document.createElement('p');
-                    attendeeElement.textContent = `${attendee.userName}`;
-                    attendeeElement.classList.add('attendee');
-                    const handleProfileClick = async () => {
-                        await createProfile(attendee._id);
-                    };
-                    attendeeElement.addEventListener('click', () => {
-                        onClickHandler('#main-container', handleProfileClick);
-                    });
-                    attendeeListElement.appendChild(attendeeElement)
-                    attendeesList.appendChild(attendeeListElement)
-                });
-            }
-
-            const attendeesText = document.createElement('h3');
-            attendeesText.textContent = `Asistentes: ${attendees.length}`;
-            eventDetailsContainer.appendChild(attendeesText);
-            eventDetailsContainer.appendChild(attendeesList);*/
-            showOrganizers(eventDetailsContainer, eventData);
-            showAttendees(eventDetailsContainer, eventData);
-
             // Agregar elementos al contenedor de detalles del evento
-            eventDetailsContainer.appendChild(dateElement);
+            eventDetailsContainer.appendChild(dateElement(eventData));
             eventDetailsContainer.appendChild(locationElement);
             eventDetailsContainer.appendChild(descriptionElement);
 
@@ -235,7 +166,7 @@ export const showEventDetails = async (eventId) => {
             // Verificar si el usuario es organizdor del evento
             const isOrganizer = eventData.event.createdBy === userId;
 
-            if (isAuthenticated && isOrganizer) {
+            if (isOrganizer) {
                 // Si es organizador del evento, mostraremos un boton para actualizar el evento, y otro para eliminar el evento
 
                 // Componente createButton que nos lleva a formulario para eliminar el evento, ya rellenado con los datos actuales del evento
@@ -253,7 +184,6 @@ export const showEventDetails = async (eventId) => {
 
             // Si no es organizador, que pueda inscribirse al evento
             if (!isOrganizer) {
-
                 // Verificar si el usuario está en la lista de asistentes al evento:
                 // contrastamos la lista de asistentes con el id del usuario, que está en localStorage
                 const isAttendee = eventData.attendees.some(user => user._id === userId);
